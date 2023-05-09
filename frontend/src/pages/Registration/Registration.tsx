@@ -63,7 +63,7 @@ export const Registration = () => {
       </div> */}
       <form onSubmit={handleSubmit(onSubmit)} className="register__form">
         <FormControl mb="15px">
-          <FormLabel mb="5px">Почта</FormLabel>
+          <FormLabel mb="5px">Полное имя</FormLabel>
           <Input
             placeholder="Введите полное имя"
             isInvalid={Boolean(errors.fullName?.message)}
@@ -85,9 +85,9 @@ export const Registration = () => {
         </FormControl>
 
         <FormControl mb="15px">
-          <FormLabel mb="5px">Почта</FormLabel>
+          <FormLabel mb="5px">Пароль</FormLabel>
           <Input
-            placeholder="Введите почту"
+            placeholder="Введите пароль"
             isInvalid={Boolean(errors.password?.message)}
             errorBorderColor="crimson"
             {...register("password", { required: "Укажите пароль" })}
