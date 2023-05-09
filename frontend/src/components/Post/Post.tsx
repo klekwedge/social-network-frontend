@@ -15,7 +15,6 @@ interface PostProps {
   viewsCount: number;
   children?: React.ReactNode;
   isFullPost?: boolean;
-  isLoading?: boolean;
   isEditable?: boolean;
 }
 
@@ -28,9 +27,10 @@ export const Post = ({
   viewsCount,
   children,
   isFullPost,
-  isLoading,
   isEditable,
 }: PostProps) => {
+  // console.log(user);
+
   return (
     <Flex className={`post ${isFullPost ? "post-full" : ""}`}>
       {isEditable && (

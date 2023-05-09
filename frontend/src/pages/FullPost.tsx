@@ -6,6 +6,7 @@ import { Post } from "../components/Post/Post";
 import { IPost } from "../types";
 import { PostSkeleton } from "../components/PostSkeleton/PostSkeleton";
 import { Flex } from "@chakra-ui/react";
+import { useAppDispatch } from "../hooks/redux-hook";
 
 export const FullPost = () => {
   const [data, setData] = useState<IPost | null>(null);
