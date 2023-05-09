@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Flex,
   FormControl,
@@ -10,6 +11,9 @@ import {
 import "./Registration.scss";
 import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hook";
+import { selectIsAuth } from "../../redux/slices/auth";
+import { fetchRegister } from "../../redux/slices/auth";
 
 type FormValues = {
   fullName: string;
@@ -18,6 +22,9 @@ type FormValues = {
 };
 
 export const Registration = () => {
+  const isAuth = useAppSelector(selectIsAuth);
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -32,20 +39,21 @@ export const Registration = () => {
   });
 
   const onSubmit = async (values: FormValues) => {
-    console.log(values);
-    // const data = await dispatch(fetchRegister(values));
-    // console.log(data);
-    // if (!data.payload) {
-    //   return alert("Не удалось зарегистрироваться");
-    // }
-    // if ("token" in data.payload) {
-    //   window.localStorage.setItem("token", data.payload.token);
-    // }
+    const data = await dispatch(fetchRegister(values));
+    console.log(data);
+
+    if (!data.payload) {
+      return alert("Не удалось зарегистрироваться");
+    }
+
+    if ("token" in data.payload) {
+      window.localStorage.setItem("token", data.payload.token);
+    }
   };
 
-  // if (isAuth) {
-  //   return <Navigate to="/" />;
-  // }
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Flex
@@ -55,12 +63,10 @@ export const Registration = () => {
       alignItems="center"
       flexDirection="column"
     >
-      <Heading as="h2" fontWeight="500" mb="30px">
+      <Heading as="h2" fontWeight="500" mb="15px">
         Создание аккаунта
       </Heading>
-      {/* <div className={styles.avatar}>
-        <Avatar sx={{ width: 100, height: 100 }} />
-      </div> */}
+      <Avatar w="90px" h="90px" mb="30px" />
       <form onSubmit={handleSubmit(onSubmit)} className="register__form">
         <FormControl mb="15px">
           <FormLabel mb="5px">Полное имя</FormLabel>

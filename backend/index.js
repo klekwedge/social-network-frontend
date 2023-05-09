@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 
 import {
     registerValidation,
@@ -37,6 +38,7 @@ const upload = multer({ storage });
 
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
+app.use(cors());
 
 app.post(
     "/auth/login",

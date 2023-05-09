@@ -12,7 +12,13 @@ export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params) => {
   return data;
 });
 
-export const fetchRegister = createAsyncThunk("auth/fetchRegister", async (params) => {
+type FormValues = {
+  fullName: string;
+  email: string;
+  password: string;
+};
+
+export const fetchRegister = createAsyncThunk("auth/fetchRegister", async (params: FormValues) => {
   const { data } = await axios.post("/auth/register", params);
   return data;
 });
