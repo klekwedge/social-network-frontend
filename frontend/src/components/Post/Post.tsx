@@ -31,7 +31,6 @@ export const Post = ({
   isLoading,
   isEditable,
 }: PostProps) => {
-
   return (
     <Flex className={`post ${isFullPost ? "post-full" : ""}`}>
       {isEditable && (
@@ -51,6 +50,7 @@ export const Post = ({
       )}
       <div className="post__wrapper">
         <UserInfo
+          userId={user?._id}
           avatarUrl={user?.avatarUrl}
           fullName={user?.fullName}
           additionalText={createdAt}

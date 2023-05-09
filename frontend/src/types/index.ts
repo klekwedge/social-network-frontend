@@ -1,9 +1,13 @@
 
 export interface IUser {
     fullName: string;
+    _id: string;
     email: string;
-    passwordHash: string;
-    avatarUrl: string,
+    // passwordHash: string;
+    avatarUrl?: string,
+    city?: string,
+    age?: number,
+    university?: string,
 }
 
 export interface IPost {
@@ -26,3 +30,5 @@ export interface IFormRegisterValues {
     email: string;
     password: string;
 }
+
+export type LoadingStatus = "loading" | "loaded" | "error"

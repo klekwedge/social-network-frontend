@@ -1,9 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
 import { RootState } from "../store";
-import { IFormLoginValues, IFormRegisterValues } from "../../types";
+import { IFormLoginValues, IFormRegisterValues, IUser, LoadingStatus } from "../../types";
 
-const initialState = {
+interface IState {
+  data: null | IUser,
+  status: LoadingStatus
+}
+
+const initialState: IState = {
   data: null,
   status: "loading",
 };
@@ -22,6 +27,7 @@ export const fetchAuthMe = createAsyncThunk(
   "auth/fetchAuthMe",
   async (params) => {
     const { data } = await axios.get("/auth/me");
+    // console.log(data)
     return data;
   }
 );

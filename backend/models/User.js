@@ -16,6 +16,9 @@ const UserSchema = new mongoose.Schema(
             required: true,
         },
         avatarUrl: String,
+        city: String,
+        age: Number,
+        university: String,
     },
     {
         timestamps: true,
