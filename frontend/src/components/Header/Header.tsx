@@ -1,10 +1,8 @@
-import React from "react";
 import { Link } from "react-router-dom";
-
-import "./Header.scss";
+import { Button, Flex } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, selectIsAuth } from "../../redux/slices/auth";
-import { Button, Flex } from "@chakra-ui/react";
+import "./Header.scss";
 
 export const Header = () => {
   const dispatch = useDispatch();

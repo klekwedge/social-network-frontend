@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
+import { IPost } from "../../types";
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   const { data } = await axios.get("/posts");
@@ -18,8 +19,9 @@ export const fetchRemovePost = createAsyncThunk(
   }
 );
 
+
 const initialState = {
-  posts: { items: [], status: "loading" },
+  posts: { items: <IPost[]>[], status: "loading" },
   tags: { items: [], status: "loading" },
 };
 
