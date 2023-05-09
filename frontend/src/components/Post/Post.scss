@@ -13,7 +13,7 @@ $blue: #4361ee;
     border: 1px solid $blue;
     box-shadow: 0 0 0 1px $blue;
 
-    .editButtons {
+    .post__edit-buttons {
       opacity: 1;
     }
   }
@@ -74,7 +74,6 @@ $blue: #4361ee;
   }
 }
 
-
 .post__details {
   list-style: none;
   padding: 0;
@@ -127,12 +126,27 @@ $blue: #4361ee;
   }
 }
 
-.editButtons {
+.post__edit-buttons {
   position: absolute;
-  right: 15px;
-  top: 15px;
-  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  right: 10px;
+  top: 10px;
   border-radius: 10px;
   opacity: 0;
   transition: all 0.15s ease-in-out;
+}
+
+.post__edit-buttons > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 1);
+  border-radius: 50%;
+  padding: 2px;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+  cursor: pointer;
 }

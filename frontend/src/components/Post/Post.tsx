@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { AiFillEye, AiFillDelete, AiFillEdit } from "react-icons/ai";
+
 import "./Post.scss";
 import { Flex } from "@chakra-ui/react";
 import { UserInfo } from "../UserInfo/UserInfo";
@@ -42,7 +44,11 @@ export const Post = () =>
       additionalText: "text",
     };
 
+    const id = 2121
+
     const title = "12z1z";
+    const viewsCount = 121;
+    const isEditable = true;
 
     const children = <h1>F</h1>;
 
@@ -51,18 +57,14 @@ export const Post = () =>
 
     return (
       <Flex className="post">
-        {/* {isEditable && (
-        <div className={styles.editButtons}>
-          <Link to={`/posts/${id}/edit`}>
-            <IconButton color="primary">
-              <EditIcon />
-            </IconButton>
-          </Link>
-          <IconButton onClick={onClickRemove} color="secondary">
-            <DeleteIcon />
-          </IconButton>
-        </div>
-      )} */}
+        {isEditable && (
+          <div className="post__edit-buttons">
+            <Link to={`/posts/${id}/edit`}>
+              <AiFillEdit />
+            </Link>
+            <AiFillDelete />
+          </div>
+        )}
         {imageUrl && <img className="post__image" src={imageUrl} alt={title} />}
         <div className="post__wrapper">
           <UserInfo {...user} additionalText={createdAt} />
@@ -73,8 +75,8 @@ export const Post = () =>
             {children && <div className="post__content">{children}</div>}
             <ul className="post__details">
               <li>
-                {/* <EyeIcon />
-                <span>{viewsCount}</span> */}
+                <AiFillEye />
+                <span>{viewsCount}</span>
               </li>
             </ul>
           </div>
