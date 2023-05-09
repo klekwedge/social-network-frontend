@@ -6,7 +6,7 @@ export const Home = () => {
     <>
       <Flex>
         <Flex>
-          <Post />
+          <Post isFullPost={false}/>
         </Flex>
       </Flex>
     </>
