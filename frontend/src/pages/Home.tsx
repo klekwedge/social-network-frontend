@@ -22,6 +22,7 @@ export const Home = () => {
       alignItems="center"
       justifyContent="center"
       p="20px"
+      gap='30px'
       flexDirection="column"
     >
       {/* {(isPostsLoading ? [...Array(5)] : posts.items).map((obj, index) =>
@@ -36,13 +37,13 @@ export const Home = () => {
           <Post
             id={obj._id}
             title={obj.title}
-            imageUrl={
-              obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ""
-            }
+            // imageUrl={
+            //   obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ""
+            // }
+            imageUrl={obj.imageUrl}
             user={obj.user}
             createdAt={obj.createdAt}
             viewsCount={obj.viewsCount}
-            commentsCount={3}
             // tags={obj.tags}
             // isEditable={userData?._id === obj.user._id}
           />

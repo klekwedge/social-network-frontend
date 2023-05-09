@@ -8,6 +8,8 @@ $blue: #4361ee;
   overflow: hidden;
   margin-bottom: 15px;
   position: relative;
+  width: 100%;
+  max-width: 500px;
 
   &:hover {
     border: 1px solid $blue;

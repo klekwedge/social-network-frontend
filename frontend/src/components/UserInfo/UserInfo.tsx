@@ -13,6 +13,7 @@ export const UserInfo = ({
   fullName,
   additionalText,
 }: UserInfoProps) => {
+
   return (
     <Flex display="flex" alignItems="center">
       <Avatar src={avatarUrl} w="30px" h="30px" borderRadius="30px" mr="10px" />
@@ -21,7 +22,7 @@ export const UserInfo = ({
           {fullName}
         </Heading>
         <Heading as="span" fontSize="12px" opacity="0.6">
-          {additionalText}
+          {additionalText ? new Date(additionalText).toLocaleString() : ""}
         </Heading>
       </Flex>
     </Flex>

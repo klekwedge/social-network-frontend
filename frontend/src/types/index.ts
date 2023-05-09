@@ -13,7 +13,7 @@ export interface IPost {
     viewsCount: number;
     user: IUser
     imageUrl: string,
-    createdAt: string
+    createdAt: string;
 }
 
 export interface IFormLoginValues {
@@ -25,4 +25,4 @@ export interface IFormRegisterValues {
     fullName: string;
     email: string;
     password: string;
-};
+}

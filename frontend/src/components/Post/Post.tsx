@@ -13,8 +13,7 @@ interface PostProps {
   imageUrl: string;
   user: IUser;
   viewsCount: number;
-  commentsCount: number;
-  // children: React.ReactNode;
+  children?: React.ReactNode;
   isFullPost?: boolean;
   isLoading?: boolean;
   isEditable?: boolean;
@@ -27,14 +26,11 @@ export const Post = ({
   imageUrl,
   user,
   viewsCount,
-  commentsCount,
-  // children,
+  children,
   isFullPost,
   isLoading,
   isEditable,
 }: PostProps) => {
-
-  const children = <h1>F</h1>;
 
   return (
     <Flex className={`post ${isFullPost ? "post-full" : ""}`}>
@@ -61,8 +57,7 @@ export const Post = ({
         />
         <div className="post__indention">
           <h2 className={`post__title ${isFullPost ? "post__title-full" : ""}`}>
-            {isFullPost ? title : <Link to={`/posts/`}>{title}</Link>}
-            {/* {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>} */}
+            {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
           </h2>
           {children && <div className="post__content">{children}</div>}
           <ul className="post__details">
