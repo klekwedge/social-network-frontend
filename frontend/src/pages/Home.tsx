@@ -3,17 +3,16 @@ import { Flex } from "@chakra-ui/react";
 import { Post } from "../components/Post/Post";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hook";
 import { fetchPosts } from "../redux/slices/posts";
+import { PostSkeleton } from "../components/PostSkeleton/PostSkeleton";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.auth.data);
   const { posts } = useAppSelector((state) => state.posts);
-
   const isPostsLoading = posts.status === "loading";
 
   useEffect(() => {
     dispatch(fetchPosts());
-    // dispatch(fetchTags());
   }, []);
 
   return (
@@ -24,28 +23,21 @@ export const Home = () => {
       gap="30px"
       flexDirection="column"
     >
-      {/* {(isPostsLoading ? [...Array(5)] : posts.items).map((obj, index) =>
-        isPostsLoading ? (
-          <Post key={index} isLoading={true} />
-        ) : ( */}
-      {/* <Post isFullPost={false} /> */}
-      {isPostsLoading ? (
-        <h1>Loading...</h1>
-      ) : (
-        posts.items.map((obj, index) => (
-          <Post
-            key={obj._id}
-            id={obj._id}
-            title={obj.title}
-            imageUrl={
-              obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ""
-            }
-            user={obj.user}
-            createdAt={obj.createdAt}
-            viewsCount={obj.viewsCount}
-          />
-        ))
-      )}
+      {isPostsLoading
+        ? [...Array(3)].map((obj, index) => <PostSkeleton key={index} />)
+        : posts.items.map((post) => (
+            <Post
+              key={post._id}
+              id={post._id}
+              title={post.title}
+              imageUrl={
+                post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""
+              }
+              user={post.user}
+              createdAt={post.createdAt}
+              viewsCount={post.viewsCount}
+            />
+          ))}
     </Flex>
   );
 };

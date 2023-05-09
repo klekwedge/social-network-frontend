@@ -4,6 +4,8 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import axios from "../axios";
 import { Post } from "../components/Post/Post";
 import { IPost } from "../types";
+import { PostSkeleton } from "../components/PostSkeleton/PostSkeleton";
+import { Flex } from "@chakra-ui/react";
 
 export const FullPost = () => {
   const [data, setData] = useState<IPost | null>(null);
@@ -23,9 +25,13 @@ export const FullPost = () => {
       });
   }, []);
 
-  // if (isLoading) {
-  //   return <Post isLoading={isLoading} isFullPost />;
-  // }
+  if (isLoading) {
+    return (
+      <Flex alignItems="center" justifyContent="center">
+        <PostSkeleton isFull={true} />
+      </Flex>
+    );
+  }
 
   return (
     <>

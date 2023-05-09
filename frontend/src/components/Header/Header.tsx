@@ -8,6 +8,7 @@ import { useAppSelector } from "../../hooks/redux-hook";
 export const Header = () => {
   const dispatch = useDispatch();
   const isAuth = useSelector(selectIsAuth);
+  const userId = useAppSelector((state) => state.auth.data?._id);
   const currentUser = useAppSelector((state) => state.auth.data);
 
   const onClickLogout = () => {
@@ -31,7 +32,13 @@ export const Header = () => {
                   <Button variant="contained">Написать пост</Button>
                 </Link>
                 <Button onClick={onClickLogout}>Выйти</Button>
-                <Button>{currentUser?.fullName}</Button>
+                {userId ? (
+                  <Link to={`/profile/${userId}`}>
+                    {currentUser?.fullName}
+                  </Link>
+                ) : (
+                  ""
+                )}
               </>
             ) : (
               <>

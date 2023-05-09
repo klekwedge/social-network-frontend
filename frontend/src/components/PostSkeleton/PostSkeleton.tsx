@@ -1,9 +1,13 @@
 import { Skeleton, SkeletonCircle, Stack } from "@chakra-ui/react";
-import "./Post.scss";
+import "./PostSkeleton.scss";
 
-export const PostSkeleton = () => {
+interface PostSkeletonProps {
+  isFull?: boolean;
+}
+
+export const PostSkeleton = ({ isFull }: PostSkeletonProps) => {
   return (
-    <div className="post__skeleton skeleton">
+    <div className={`skeleton ${isFull ? 'skeleton__full' :''}`}>
       <Stack spacing={1}>
         <Skeleton variant="rectangular" width="100%" height={300} />
         <div className="skeleton__content">

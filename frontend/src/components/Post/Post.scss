@@ -99,33 +99,6 @@ $blue: #4361ee;
   }
 }
 
-.skeleton {
-  background-color: #fff;
-  border: 1px solid #dedede;
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 15px;
-
-  &__content {
-    padding: 20px;
-  }
-
-  &__info {
-    margin-left: 10px;
-  }
-}
-
-.skeleton__user {
-  display: flex;
-  margin-bottom: 15px;
-
-  &-details {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-
 .post__edit-buttons {
   position: absolute;
   display: flex;
