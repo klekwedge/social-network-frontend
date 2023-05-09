@@ -19,7 +19,6 @@ export const fetchRemovePost = createAsyncThunk(
   }
 );
 
-
 const initialState = {
   posts: { items: <IPost[]>[], status: "loading" },
   tags: { items: [], status: "loading" },

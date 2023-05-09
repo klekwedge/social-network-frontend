@@ -36,6 +36,7 @@ export const FullPost = () => {
           // imageUrl={
           //   data.imageUrl ? `http://localhost:4444/${data.imageUrl}` : ""
           // }
+
           imageUrl={data.imageUrl}
           user={data.user}
           createdAt={data.createdAt}
