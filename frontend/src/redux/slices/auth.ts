@@ -7,7 +7,13 @@ const initialState = {
   status: "loading",
 };
 
-export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params) => {
+
+type FormLoginValues = {
+  email: string;
+  password: string;
+};
+
+export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params: FormLoginValues) => {
   const { data } = await axios.post("/auth/login", params);
   return data;
 });

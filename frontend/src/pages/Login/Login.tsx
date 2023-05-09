@@ -11,6 +11,8 @@ import {
 import { useForm } from "react-hook-form";
 
 import "./Login.scss";
+import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
+import { useAppDispatch, useAppSelector } from "../../hooks/redux-hook";
 
 type FormValues = {
   email: string;
@@ -18,6 +20,9 @@ type FormValues = {
 };
 
 export const Login = () => {
+  const isAuth = useAppSelector(selectIsAuth);
+  const dispatch = useAppDispatch();
+
   const {
     register,
     handleSubmit,
@@ -31,19 +36,21 @@ export const Login = () => {
   });
 
   const onSubmitForm = async (values: FormValues) => {
-    // const data = await dispatch(fetchAuth(values));
-    // console.log(data);
-    // if (!data.payload) {
-    //   return alert("Не удалось авторизоваться");
-    // }
-    // if ("token" in data.payload) {
-    //   window.localStorage.setItem("token", data.payload.token);
-    // }
+    const data = await dispatch(fetchAuth(values));
+
+    console.log(data);
+
+    if (!data.payload) {
+      return alert("Не удалось авторизоваться");
+    }
+    if ("token" in data.payload) {
+      window.localStorage.setItem("token", data.payload.token);
+    }
   };
 
-  // if (isAuth) {
-  //   return <Navigate to="/" />;
-  // }
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <Flex
@@ -53,7 +60,7 @@ export const Login = () => {
       alignItems="center"
       flexDirection="column"
     >
-      <Heading as="h2" fontWeight="500" mb='30px'>
+      <Heading as="h2" fontWeight="500" mb="30px">
         Вход в аккаунт
       </Heading>
       <form onSubmit={handleSubmit(onSubmitForm)} className="login__form">
