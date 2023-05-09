@@ -112,8 +112,6 @@ export const getUser = async (req, res) => {
     try {
         const user = await UserModel.findById(req.params.id);
 
-        console.log('1', user);
-
         if (!user) {
             return res.status(404).json({
                 message: "Пользователь не найден",
@@ -128,6 +126,31 @@ export const getUser = async (req, res) => {
 
         res.status(500).json({
             message: "Нет доступа",
+        });
+    }
+};
+
+export const changeUserPhoto = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        const doc = await UserModel.updateOne(
+            {
+                _id: userId,
+            },
+            {
+                avatarUrl: req.body.imageUrl,
+            }
+        );
+
+        res.json({
+            success: true,
+        });
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            message: "Не удалось обновить фотографию пользователя",
         });
     }
 };

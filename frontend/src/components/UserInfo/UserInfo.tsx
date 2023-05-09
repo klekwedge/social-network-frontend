@@ -4,7 +4,7 @@ import { Avatar, Flex, Heading } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 interface UserInfoProps {
-  avatarUrl: string;
+  avatarUrl?: string;
   fullName: string;
   additionalText: string;
   userId: string;
@@ -21,7 +21,7 @@ export const UserInfo = ({
     <Flex display="flex" alignItems="center">
       <Link to={`/profile/${userId}`}>
         <Avatar
-          src={avatarUrl}
+          src={avatarUrl ? `http://localhost:4444${avatarUrl}` : ""}
           w="30px"
           h="30px"
           borderRadius="30px"

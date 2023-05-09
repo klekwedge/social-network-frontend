@@ -13,13 +13,13 @@ export const fetchUser = createAsyncThunk(
 
 
 interface IState {
-  currentUser: IUser | null
+  user: IUser | null
   status: LoadingStatus
 }
 
 
 const initialState: IState = {
-  currentUser: null,
+  user: null,
   status: 'loading'
 };
 
@@ -30,15 +30,15 @@ const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.pending, (state) => {
-        state.currentUser = null;
+        state.user = null;
         state.status = "loading";
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
-        state.currentUser = action.payload;
+        state.user = action.payload;
         state.status = "loaded";
       })
       .addCase(fetchUser.rejected, (state) => {
-        state.currentUser = null;
+        state.user = null;
         state.status = "error";
       })
   },

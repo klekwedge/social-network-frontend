@@ -10,49 +10,54 @@ export const Profile = () => {
   const { id } = useParams();
   const [imageUrl, setImageUrl] = useState("");
   const [isUserCurrent, setIsUserCurrent] = useState(false);
-  const user = useAppSelector((state) => state.users.currentUser);
+  const user = useAppSelector((state) => state.users.user);
   const currentUser = useAppSelector((state) => state.auth.data);
   const inputFileRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchUser(id));
-
-      if (user && currentUser) {
-        setIsUserCurrent(true);
-      }
     }
   }, []);
+
+  useEffect(() => {
+    if (currentUser && id === currentUser._id) {
+      setIsUserCurrent(true);
+      setImageUrl(currentUser.avatarUrl || '')
+    }
+  }, [currentUser, id]);
 
   const onSubmit = async () => {
     try {
       // setLoading(true);
-      // const fields = {
-      //   title,
-      //   imageUrl,
-      //   text,
-      // };
+
+      await axios.patch(`/user/${id}`, {
+        imageUrl,
+      });
+
       // const { data } = isEditing
-      //   ? await axios.patch(`/posts/${id}`, fields)
-      //   : await axios.post("/posts", fields);
-      // const _id = isEditing ? id : data._id;
-      // navigate(`/posts/${_id}`);
+      // ? await axios.patch(`/posts/${id}`, fields)
+      // : await axios.post("/posts", fields);
     } catch (error) {
       console.warn(error);
-      alert("Ошибка при создании статьи");
+      alert("Ошибка при обновлении фотографии");
     }
   };
 
-  const handleChangeFile = async (event: any) => {
-    try {
-      const formData = new FormData();
-      const file = event.target.files[0];
-      formData.append("image", file);
-      const { data } = await axios.post("/upload", formData);
-      setImageUrl(data.url);
-    } catch (error) {
-      console.warn(error);
-      alert("Ошибка при загрузке файла");
+  const handleChangeFile = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (event.target.files) {
+      try {
+        const formData = new FormData();
+        const file = event.target.files[0];
+        formData.append("image", file);
+        const { data } = await axios.post("/upload", formData);
+        setImageUrl(data.url);
+      } catch (error) {
+        console.warn(error);
+        alert("Ошибка при загрузке файла");
+      }
     }
   };
 
@@ -70,7 +75,17 @@ export const Profile = () => {
           alignItems="center"
           position="relative"
         >
-          <Avatar src={user.avatarUrl} w="200px" h="200px" mb="10px" />
+          {imageUrl ? (
+            <Avatar
+              src={`http://localhost:4444${imageUrl}`}
+              w="200px"
+              h="200px"
+              mb="10px"
+            />
+          ) : (
+            <Avatar w="200px" h="200px" mb="10px" />
+          )}
+
           <Heading as="h2" fontWeight="500" fontSize="25px" mb="10px">
             {user.fullName}
           </Heading>

@@ -69,10 +69,10 @@ export const AddPost = () => {
       axios
         .get(`posts/${id}`)
         .then(({ data }) => {
+          console.log(data);
           setTitle(data.title);
           setText(data.text);
           setImageUrl(data.imageUrl);
-          // setTags(data.tags.join(","));
         })
         .catch((err) => {
           console.warn(err);
@@ -88,10 +88,10 @@ export const AddPost = () => {
       autofocus: true,
       placeholder: "Введите текст...",
       status: false,
-      autosave: {
-        enabled: true,
-        delay: 1000,
-      },
+      // autosave: {
+      //   enabled: true,
+      //   delay: 1000,
+      // },
     }),
     []
   );
@@ -117,8 +117,7 @@ export const AddPost = () => {
       {imageUrl && (
         <img
           className="add-post__image"
-          src={imageUrl}
-          // src={`http://localhost:4444${imageUrl}`}
+          src={`http://localhost:4444${imageUrl}`}
           alt="Uploaded"
         />
       )}

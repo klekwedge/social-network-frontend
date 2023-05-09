@@ -31,6 +31,7 @@ export const Post = ({
   isLoading,
   isEditable,
 }: PostProps) => {
+  console.log(imageUrl);
   return (
     <Flex className={`post ${isFullPost ? "post-full" : ""}`}>
       {isEditable && (
