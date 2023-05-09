@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 import UserModel from "../models/User.js";
+import { UserController } from "./index.js";
 
 export const register = async (req, res) => {
     try {
@@ -151,6 +152,65 @@ export const changeUserPhoto = async (req, res) => {
 
         res.status(500).json({
             message: "Не удалось обновить фотографию пользователя",
+        });
+    }
+};
+
+export const addFriend = async (req, res) => {
+    try {
+        const userId = req.body.user;
+        const friend = req.body.friend;
+
+        const doc = await UserModel.updateOne(
+            {
+                _id: userId,
+            },
+            {
+                $push: {
+                    "friends": friend
+                }
+            }
+        );
+
+        res.json({
+            success: true,
+        });
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            message: "Не удалось добавить друга",
+        });
+    }
+};
+
+export const deleteFriend = async (req, res) => {
+    try {
+        const userId = req.body.user;
+        const friend = req.body.friend;
+
+        // db.online_service.update(
+        //     { },
+        //     { $pull: { accounts_data: { $elemMatch: { id: "inst_f18+" } } } }, 
+        //     { multi: true }
+        // )
+
+        const doc = await UserModel.findByIdAndUpdate({
+            _id: userId,
+        },
+            {
+                $pull: { friends: friend }
+            }
+        );
+
+        res.json({
+            success: true,
+        });
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            message: "Не удалось добавить друга",
         });
     }
 };

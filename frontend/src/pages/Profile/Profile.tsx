@@ -18,20 +18,27 @@ export const Profile = () => {
   const inputFileRef = useRef<HTMLInputElement | null>(null);
   const { userPosts } = useAppSelector((state) => state.posts);
   const isPostsLoading = userPosts.status === "loading";
+  const [isFriend, setIsFriend] = useState(false);
+
+  useEffect(() => {
+    if (user && currentUser) {
+      const isFind = currentUser.friends.find((id) => id === user._id);
+      console.log(isFind);
+      setIsFriend(!!isFind);
+    }
+  }, [currentUser, user]);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchUserPosts(id));
     }
-  }, []);
-
-  console.log(userPosts);
+  }, [id]);
 
   useEffect(() => {
     if (id) {
       dispatch(fetchUser(id));
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (currentUser && id === currentUser._id) {
@@ -72,6 +79,24 @@ export const Profile = () => {
 
   const onClickRemoveImage = () => {
     setImageUrl("");
+  };
+
+  const addFriend = async () => {
+    if (currentUser?._id && user?._id) {
+      await axios.post("/friend", {
+        user: currentUser._id,
+        friend: user._id,
+      });
+    }
+  };
+
+  const removeFriend = async () => {
+    if (currentUser?._id && user?._id) {
+      await axios.patch("/friend", {
+        user: currentUser._id,
+        friend: user._id,
+      });
+    }
   };
 
   return (
@@ -128,8 +153,26 @@ export const Profile = () => {
             </Flex>
           ) : (
             <Flex position="absolute" right="20px" gap="10px">
-              <Button>Добавить в друзья</Button>
-              <Button>Удалить из друзей</Button>
+              {isFriend}
+              {isFriend ? (
+                <Button
+                  onClick={() => {
+                    setIsFriend(false);
+                    removeFriend();
+                  }}
+                >
+                  Удалить из друзей
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => {
+                    setIsFriend(true);
+                    addFriend();
+                  }}
+                >
+                  Добавить в друзья
+                </Button>
+              )}
             </Flex>
           )}
         </Flex>
@@ -141,7 +184,7 @@ export const Profile = () => {
         Посты пользователя:
       </Heading>
       {isPostsLoading ? (
-        <Flex flexDirection="column" gap='20px'>
+        <Flex flexDirection="column" gap="20px">
           <PostSkeleton />
           <PostSkeleton />
         </Flex>

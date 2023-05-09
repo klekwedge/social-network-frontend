@@ -29,24 +29,25 @@ export const Header = () => {
             {isAuth ? (
               <>
                 <Link to="/add-post">
-                  <Button variant="contained">Написать пост</Button>
+                  <Button>Написать пост</Button>
                 </Link>
                 <Button onClick={onClickLogout}>Выйти</Button>
                 {userId ? (
-                  <Link to={`/profile/${userId}`}>
-                    {currentUser?.fullName}
-                  </Link>
+                  <Link to={`/profile/${userId}`}>{currentUser?.fullName}</Link>
                 ) : (
                   ""
                 )}
+                <Link to="/friends">
+                  <Button>Мои друзья</Button>
+                </Link>
               </>
             ) : (
               <>
                 <Link to="/login">
-                  <Button variant="outlined">Войти</Button>
+                  <Button>Войти</Button>
                 </Link>
                 <Link to="/register">
-                  <Button variant="contained">Создать аккаунт</Button>
+                  <Button>Создать аккаунт</Button>
                 </Link>
               </>
             )}

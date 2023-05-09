@@ -59,6 +59,9 @@ app.get("/auth/me", checkAuth, UserController.getMe);
 app.get("/user/:id", UserController.getUser);
 app.patch("/user/:id", checkAuth, UserController.changeUserPhoto);
 
+app.post("/friend", checkAuth, UserController.addFriend);
+app.patch("/friend", checkAuth, UserController.deleteFriend);
+
 app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
     res.json({
         url: `/uploads/${req.file.originalname}`,

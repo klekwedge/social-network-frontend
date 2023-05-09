@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema(
         city: String,
         age: Number,
         university: String,
+        friends: Array(String)
     },
     {
         timestamps: true,

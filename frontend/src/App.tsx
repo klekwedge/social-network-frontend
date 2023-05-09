@@ -9,6 +9,7 @@ import { AddPost } from "./pages/AddPost/AddPost";
 import { useAppDispatch, useAppSelector } from "./hooks/redux-hook";
 import { fetchAuthMe, selectIsAuth } from "./redux/slices/auth";
 import { Header } from "./components/Header/Header";
+import { Friends } from "./pages/Friends/Friends";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -30,6 +31,7 @@ function App() {
         <Route path="/posts/edit" element={<AddPost />} />
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/add-post" element={<AddPost />} />
+        <Route path="/friends" element={<Friends />} />
         <Route path="*" element={<h1>404</h1>} />
       </Routes>
     </>

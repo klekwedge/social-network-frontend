@@ -3,6 +3,7 @@ export interface IUser {
     fullName: string;
     _id: string;
     email: string;
+    friends: string[]
     // passwordHash: string;
     avatarUrl?: string,
     city?: string,
