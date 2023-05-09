@@ -3,6 +3,7 @@
   padding: 10px 0;
   border-bottom: 1px solid #e0e0e0;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .header__inner {
@@ -27,11 +28,7 @@
 }
 
 .header__buttons {
-  button {
-    margin-left: 10px;
-  }
-
-  a {
-    text-decoration: none;
-  }
+  display: flex;
+  gap: 15px;
+  align-items: center;
 }
