@@ -22,7 +22,7 @@ export const Home = () => {
       alignItems="center"
       justifyContent="center"
       p="20px"
-      gap='30px'
+      gap="30px"
       flexDirection="column"
     >
       {/* {(isPostsLoading ? [...Array(5)] : posts.items).map((obj, index) =>
@@ -35,6 +35,7 @@ export const Home = () => {
       ) : (
         posts.items.map((obj, index) => (
           <Post
+            key={obj._id}
             id={obj._id}
             title={obj.title}
             imageUrl={
@@ -43,8 +44,6 @@ export const Home = () => {
             user={obj.user}
             createdAt={obj.createdAt}
             viewsCount={obj.viewsCount}
-            // tags={obj.tags}
-            // isEditable={userData?._id === obj.user._id}
           />
         ))
       )}

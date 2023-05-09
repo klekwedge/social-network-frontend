@@ -69,7 +69,6 @@ export const AddPost = () => {
       axios
         .get(`posts/${id}`)
         .then(({ data }) => {
-          console.log(data);
           setTitle(data.title);
           setText(data.text);
           setImageUrl(data.imageUrl);

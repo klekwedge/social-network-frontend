@@ -40,7 +40,6 @@ export const Registration = () => {
 
   const onSubmit = async (values: FormValues) => {
     const data = await dispatch(fetchRegister(values));
-    console.log(data);
 
     if (!data.payload) {
       return alert("Не удалось зарегистрироваться");

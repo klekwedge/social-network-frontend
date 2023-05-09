@@ -23,7 +23,7 @@ export const Profile = () => {
   useEffect(() => {
     if (currentUser && id === currentUser._id) {
       setIsUserCurrent(true);
-      setImageUrl(currentUser.avatarUrl || '')
+      setImageUrl(currentUser.avatarUrl || "");
     }
   }, [currentUser, id]);
 
@@ -83,7 +83,7 @@ export const Profile = () => {
               mb="10px"
             />
           ) : (
-            <Avatar w="200px" h="200px" mb="10px" />
+            <Avatar src="#" w="200px" h="200px" mb="10px" />
           )}
 
           <Heading as="h2" fontWeight="500" fontSize="25px" mb="10px">
@@ -109,10 +109,12 @@ export const Profile = () => {
                 onChange={handleChangeFile}
                 hidden
               />
-              {imageUrl && (
-                <Button onClick={onClickRemoveImage}>Удалить</Button>
+              {imageUrl !== user.avatarUrl && (
+                <Flex gap='15px'>
+                  <Button onClick={onClickRemoveImage}>Удалить</Button>
+                  <Button onClick={onSubmit}>Сохранить</Button>
+                </Flex>
               )}
-              <Button onClick={onSubmit}>Сохранить</Button>
             </Flex>
           ) : (
             <Flex position="absolute" right="20px" gap="10px">
