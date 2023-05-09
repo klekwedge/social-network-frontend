@@ -3,12 +3,10 @@ import { Post } from "../components/Post/Post";
 
 export const Home = () => {
   return (
-    <>
+    <Flex alignItems="center" justifyContent="center" p="20px">
       <Flex>
-        <Flex>
-          <Post isFullPost={false}/>
-        </Flex>
+        <Post isFullPost={false} />
       </Flex>
-    </>
+    </Flex>
   );
 };

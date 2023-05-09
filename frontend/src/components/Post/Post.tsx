@@ -74,7 +74,8 @@ PostProps) => {
         <UserInfo {...user} additionalText={createdAt} />
         <div className="post__indention">
           <h2 className={`post__title ${isFullPost ? "post__title-full" : ""}`}>
-            {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
+            {isFullPost ? title : <Link to={`/posts/`}>{title}</Link>}
+            {/* {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>} */}
           </h2>
           {children && <div className="post__content">{children}</div>}
           <ul className="post__details">

@@ -104,31 +104,25 @@ $blue: #4361ee;
   overflow: hidden;
   margin-bottom: 15px;
 
-  &Content {
+  &__content {
     padding: 20px;
   }
 
-  &Info {
-    margin-left: 50px;
+  &__info {
+    margin-left: 10px;
   }
 }
 
-.skeletonUser {
+.skeleton__user {
   display: flex;
+  margin-bottom: 15px;
 
-  &Details {
+  &-details {
     display: flex;
     flex-direction: column;
   }
 }
 
-.skeletonTags {
-  display: flex;
-
-  span {
-    margin-right: 15px;
-  }
-}
 
 .post__edit-buttons {
   position: absolute;
