@@ -7,10 +7,9 @@ import { fetchPosts } from "../redux/slices/posts";
 export const Home = () => {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.auth.data);
-  const { posts, tags } = useAppSelector((state) => state.posts);
+  const { posts } = useAppSelector((state) => state.posts);
 
   const isPostsLoading = posts.status === "loading";
-  const isTagsLoading = tags.status === "loading";
 
   useEffect(() => {
     dispatch(fetchPosts());

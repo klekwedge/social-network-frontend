@@ -4,6 +4,8 @@ import axios from "../../axios";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hook";
 import { fetchUser } from "../../redux/slices/users";
 import { Avatar, Button, Flex, Heading } from "@chakra-ui/react";
+import { fetchUserPosts } from "../../redux/slices/posts";
+import { Post } from "../../components/Post/Post";
 
 export const Profile = () => {
   const dispatch = useAppDispatch();
@@ -13,6 +15,17 @@ export const Profile = () => {
   const user = useAppSelector((state) => state.users.user);
   const currentUser = useAppSelector((state) => state.auth.data);
   const inputFileRef = useRef<HTMLInputElement | null>(null);
+
+  const { userPosts } = useAppSelector((state) => state.posts);
+  const isPostsLoading = userPosts.status === "loading";
+
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchUserPosts(id));
+    }
+  }, []);
+
+  console.log(userPosts);
 
   useEffect(() => {
     if (id) {
@@ -66,7 +79,7 @@ export const Profile = () => {
   };
 
   return (
-    <>
+    <Flex flexDirection="column" p="0px 30px">
       {user ? (
         <Flex
           width="100%"
@@ -74,6 +87,7 @@ export const Profile = () => {
           flexDirection="column"
           alignItems="center"
           position="relative"
+          mb="30px"
         >
           {imageUrl ? (
             <Avatar
@@ -110,7 +124,7 @@ export const Profile = () => {
                 hidden
               />
               {imageUrl !== user.avatarUrl && (
-                <Flex gap='15px'>
+                <Flex gap="15px">
                   <Button onClick={onClickRemoveImage}>Удалить</Button>
                   <Button onClick={onSubmit}>Сохранить</Button>
                 </Flex>
@@ -124,24 +138,24 @@ export const Profile = () => {
           )}
         </Flex>
       ) : (
-        // <h1>{currentUser}</h1>
-        // <Post
-        //   id={data._id}
-        //   title={data.title}
-        //   // imageUrl={
-        //   //   data.imageUrl ? `http://localhost:4444/${data.imageUrl}` : ""
-        //   // }
-
-        //   imageUrl={data.imageUrl}
-        //   user={data.user}
-        //   createdAt={data.createdAt}
-        //   viewsCount={data.viewsCount}
-        //   isFullPost={true}
-        // >
-        //   <ReactMarkdown children={data.text} />
-        // </Post>
         ""
       )}
-    </>
+
+      <Heading as="h3" fontWeight="400" fontSize="25px" mb='20px'>
+        Посты пользователя:
+      </Heading>
+
+      {userPosts.items.map((obj, index) => (
+        <Post
+          key={obj._id}
+          id={obj._id}
+          title={obj.title}
+          imageUrl={obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ""}
+          user={obj.user}
+          createdAt={obj.createdAt}
+          viewsCount={obj.viewsCount}
+        />
+      ))}
+    </Flex>
   );
 };

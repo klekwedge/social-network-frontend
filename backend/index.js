@@ -82,6 +82,8 @@ app.patch(
     PostController.update
 );
 
+app.get("/user/posts/:id", PostController.getUserPosts);
+
 app.listen(4444, (err) => {
     if (err) {
         return console.log(err);

@@ -147,3 +147,18 @@ export const update = async (req, res) => {
         });
     }
 };
+
+export const getUserPosts = async (req, res) => {
+    const userId = req.params.id
+
+    try {
+        const posts = await PostModel.find({ user: userId }).populate("user").exec();
+        res.json(posts);
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            message: "Не удалось получить статьи",
+        });
+    }
+};

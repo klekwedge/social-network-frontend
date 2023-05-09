@@ -7,8 +7,8 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
   return data;
 });
 
-export const fetchTags = createAsyncThunk("posts/fetchTags", async () => {
-  const { data } = await axios.get("/tags");
+export const fetchUserPosts = createAsyncThunk("posts/fetchUserPosts", async (userId: string) => {
+  const { data } = await axios.get(`/user/posts/${userId}`);
   return data;
 });
 
@@ -21,7 +21,7 @@ export const fetchRemovePost = createAsyncThunk(
 
 const initialState = {
   posts: { items: <IPost[]>[], status: "loading" },
-  tags: { items: [], status: "loading" },
+  userPosts: { items: <IPost[]> [], status: "loading" },
 };
 
 const postsSlice = createSlice({
@@ -42,17 +42,17 @@ const postsSlice = createSlice({
         state.posts.items = [];
         state.posts.status = "error";
       })
-      .addCase(fetchTags.pending, (state) => {
-        state.tags.items = [];
-        state.tags.status = "loading";
+      .addCase(fetchUserPosts.pending, (state) => {
+        state.userPosts.items = [];
+        state.userPosts.status = "loading";
       })
-      .addCase(fetchTags.fulfilled, (state, action) => {
-        state.posts.items = action.payload;
-        state.posts.status = "loaded";
+      .addCase(fetchUserPosts.fulfilled, (state, action) => {
+        state.userPosts.items = action.payload;
+        state.userPosts.status = "loaded";
       })
-      .addCase(fetchTags.rejected, (state) => {
-        state.tags.items = [];
-        state.tags.status = "error";
+      .addCase(fetchUserPosts.rejected, (state) => {
+        state.userPosts.items = [];
+        state.userPosts.status = "error";
       })
       .addCase(fetchRemovePost.pending, (state, action) => {
         state.posts.items = state.posts.items.filter(
