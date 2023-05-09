@@ -1,5 +1,5 @@
 import { Skeleton, SkeletonCircle, Stack } from "@chakra-ui/react";
-import styles from "./Post.scss";
+import "./Post.scss";
 
 export const PostSkeleton = () => {
   return (
