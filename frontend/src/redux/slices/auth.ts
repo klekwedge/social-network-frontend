@@ -12,7 +12,7 @@ interface IState {
 const initialState: IState = {
   data: null,
   status: "loading",
-  theme: localStorage.getItem("theme") || 'dark'
+  theme: localStorage.getItem("theme") || 'light'
 };
 
 export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params: IFormLoginValues) => {

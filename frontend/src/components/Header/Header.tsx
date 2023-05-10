@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import Logo from "/src/assets/svg/logo-icon.svg";
+import DarkLogo from "/src/assets/svg/dark-logo-icon.svg";
+import LightLogo from "/src/assets/svg/light-logo-icon.svg";
 import ExitIcon from "/src/assets/svg/exit-icon.svg";
 import ThemeIcon from "/src/assets/svg/theme-icon.svg";
 import ArrowIcon from "/src/assets/svg/arrow-bottom-icon.svg";
@@ -34,11 +35,17 @@ export const Header = () => {
   // const bgColor = useColorModeValue('gray.500', 'whiteAlpha.500')
   // const secondaryTextColor = useColorModeValue('gray.600', 'green.400')
 
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    document.body.className = theme;
+  const changePageTheme = (newColor: string) => {
+    dispatch(changeTheme(newColor));
+    localStorage.setItem("theme", newColor);
     toggleColorMode();
-  }, [theme]);
+  };
+
+  useEffect(() => {
+    if (theme === "dark") {
+      toggleColorMode();
+    }
+  }, []);
 
   useEffect(() => {
     if (currentUser) {
@@ -60,7 +67,7 @@ export const Header = () => {
       // bg={bgColor}
     >
       <Link className="header__logo" to="/">
-        <img src={Logo} alt="logo icon" />
+        <img src={theme === "light" ? LightLogo : DarkLogo} alt="logo icon" />
       </Link>
       <Menu closeOnSelect={false}>
         <MenuButton as="button">
@@ -90,7 +97,7 @@ export const Header = () => {
                     value={theme}
                     onChange={(newColor) => {
                       onClose();
-                      dispatch(changeTheme(newColor));
+                      changePageTheme(newColor);
                     }}
                     display="flex"
                     flexDirection="column"
