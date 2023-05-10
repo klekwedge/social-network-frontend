@@ -57,7 +57,7 @@ app.post(
 app.get("/auth/me", checkAuth, UserController.getMe);
 
 app.get("/user/:id", UserController.getUser);
-app.patch("/user/:id", checkAuth, UserController.changeUserPhoto);
+app.patch("/user/:id", checkAuth, UserController.changeUserInfo);
 
 app.post("/friend", checkAuth, UserController.addFriend);
 app.patch("/friend", checkAuth, UserController.deleteFriend);

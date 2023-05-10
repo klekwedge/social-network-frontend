@@ -18,16 +18,9 @@ export const Friends = () => {
   const { posts } = useAppSelector((state) => state.posts);
   const [isLoading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (isAuth) {
-      console.log(currentUser);
-    }
-  }, []);
-
   const getPosts = async () => {
     if (currentUser) {
       const { data } = await axios.get(`/friend/${currentUser._id}`);
-      console.log(data);
     }
   };
 

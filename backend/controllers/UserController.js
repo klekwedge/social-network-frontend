@@ -95,8 +95,6 @@ export const getMe = async (req, res) => {
             });
         }
 
-        // console.log(user)
-
         const { passwordHash, ...userData } = user._doc;
 
         res.json(userData);
@@ -132,7 +130,7 @@ export const getUser = async (req, res) => {
     }
 };
 
-export const changeUserPhoto = async (req, res) => {
+export const changeUserInfo= async (req, res) => {
     try {
         const userId = req.params.id;
 
@@ -141,6 +139,9 @@ export const changeUserPhoto = async (req, res) => {
                 _id: userId,
             },
             {
+                city: req.body.userCity,
+                age: req.body.userAge,
+                university: req.body.userUniversiry,
                 avatarUrl: req.body.imageUrl,
             }
         );
@@ -158,17 +159,14 @@ export const changeUserPhoto = async (req, res) => {
 };
 
 export const getPostFriends = async (req, res) => {
-    console.log(req.params);
     try {
         const user = await UserModel.find(
             {
                 _id: req.params.id,
             },
         )
-        
-        // const friends = user.friends
 
-        // console.log('f', friends);
+        // const friends = user.friends
 
         const userPosts = await PostModel.find(
             {
@@ -176,7 +174,6 @@ export const getPostFriends = async (req, res) => {
             },
         )
 
-        // console.log(userPosts);
 
         // const posts = await UserModel.find({
         //     _id: {

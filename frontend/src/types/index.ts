@@ -7,7 +7,7 @@ export interface IUser {
     // passwordHash: string;
     avatarUrl?: string,
     city?: string,
-    age?: number,
+    age?: string,
     university?: string,
 }
 

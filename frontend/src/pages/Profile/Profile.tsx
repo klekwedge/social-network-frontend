@@ -81,10 +81,13 @@ export const Profile = () => {
   const isPostsLoading = userPosts.status === "loading";
   const [isFriend, setIsFriend] = useState(false);
 
+  const [userCity, setUserCity] = useState<string | undefined>("");
+  const [userAge, setUserAge] = useState<string | undefined>("");
+  const [userUniversiry, setUserUniversiry] = useState<string | undefined>("");
+
   useEffect(() => {
     if (user && currentUser) {
       const isFind = currentUser.friends.find((id) => id === user._id);
-      console.log(isFind);
       setIsFriend(!!isFind);
     }
   }, [currentUser, user]);
@@ -105,6 +108,10 @@ export const Profile = () => {
     if (currentUser && id === currentUser._id) {
       setIsUserCurrent(true);
       setImageUrl(currentUser.avatarUrl || "");
+
+      setUserCity(currentUser.city || "");
+      setUserAge(currentUser.age || "");
+      setUserUniversiry(currentUser.university || "");
     }
   }, [currentUser, id]);
 
@@ -113,6 +120,9 @@ export const Profile = () => {
       // setLoading(true);
 
       await axios.patch(`/user/${id}`, {
+        userCity,
+        userAge,
+        userUniversiry,
         imageUrl,
       });
 
@@ -122,6 +132,8 @@ export const Profile = () => {
       alert("Ошибка при обновлении фотографии");
     }
   };
+  
+  console.log(currentUser);
 
   const handleChangeFile = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -183,15 +195,13 @@ export const Profile = () => {
             {isUserCurrent ? (
               <Flex flexDirection="column" mb="30px" gap="5px">
                 <Editable
-                  defaultValue={currentUser?.city ? currentUser.city : ""}
+                  defaultValue={userCity}
                   display="flex"
                   alignItems="center"
                   fontSize="20px"
                   gap="5px"
                   isPreviewFocusable={false}
-                  onChange={(e) => {
-                    console.log(e);
-                  }}
+                  onChange={(newValue) => setUserCity(newValue)}
                 >
                   Город:
                   <EditablePreview />
@@ -199,15 +209,13 @@ export const Profile = () => {
                   <EditableControls />
                 </Editable>
                 <Editable
-                  defaultValue={currentUser?.age ? String(currentUser.age) : ""}
+                  defaultValue={userAge}
                   display="flex"
                   gap="5px"
                   alignItems="center"
                   fontSize="20px"
                   isPreviewFocusable={false}
-                  onChange={(e) => {
-                    console.log(e);
-                  }}
+                  onChange={(newValue) => setUserAge(newValue)}
                 >
                   Возраст:
                   <EditablePreview />
@@ -215,17 +223,13 @@ export const Profile = () => {
                   <EditableControls />
                 </Editable>
                 <Editable
-                  defaultValue={
-                    currentUser?.university ? currentUser.university : ""
-                  }
+                  defaultValue={userUniversiry}
                   display="flex"
                   alignItems="center"
                   fontSize="20px"
                   gap="5px"
                   isPreviewFocusable={false}
-                  onChange={(e) => {
-                    console.log(e);
-                  }}
+                  onChange={(newValue) => setUserUniversiry(newValue)}
                 >
                   Университет:
                   <EditablePreview />
@@ -248,11 +252,18 @@ export const Profile = () => {
             )}
             {isUserCurrent ? (
               <Flex mb="30px" gap="15px">
-                <Button
-                //  onClick={() => inputFileRef.current?.click()}
-                >
-                  Сохранить данные
-                </Button>
+                {imageUrl !== currentUser?.avatarUrl ||
+                (userCity && userCity != currentUser?.city) ||
+                (userAge && userAge != currentUser?.age) ||
+                (userUniversiry &&
+                  userUniversiry != currentUser?.university) ? (
+                  <Flex gap="15px">
+                    <Button onClick={onSubmit}>Сохранить данные</Button>
+                  </Flex>
+                ) : (
+                  ""
+                )}
+
                 <Button onClick={() => inputFileRef.current?.click()}>
                   Изменить фото
                 </Button>
@@ -264,8 +275,7 @@ export const Profile = () => {
                 />
                 {imageUrl !== currentUser?.avatarUrl && (
                   <Flex gap="15px">
-                    <Button onClick={onClickRemoveImage}>Удалить</Button>
-                    <Button onClick={onSubmit}>Сохранить</Button>
+                    <Button onClick={onClickRemoveImage}>Удалить фото</Button>
                   </Flex>
                 )}
               </Flex>

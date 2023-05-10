@@ -35,6 +35,7 @@ export const Header = () => {
   // const bgColor = useColorModeValue('gray.500', 'whiteAlpha.500')
   // const secondaryTextColor = useColorModeValue('gray.600', 'green.400')
 
+
   const changePageTheme = (newColor: string) => {
     dispatch(changeTheme(newColor));
     localStorage.setItem("theme", newColor);

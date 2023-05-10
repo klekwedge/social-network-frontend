@@ -29,7 +29,6 @@ export const fetchAuthMe = createAsyncThunk(
   "auth/fetchAuthMe",
   async (params) => {
     const { data } = await axios.get("/auth/me");
-    // console.log(data)
     return data;
   }
 );
@@ -45,7 +44,6 @@ const authSlice = createSlice({
       state.theme = action.payload
     },
     changeAvatar: (state, action) => {
-      console.log(action);
       if (state.data) {
         state.data.avatarUrl = action.payload
       }

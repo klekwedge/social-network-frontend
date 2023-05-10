@@ -17,7 +17,7 @@ const UserSchema = new mongoose.Schema(
         },
         avatarUrl: String,
         city: String,
-        age: Number,
+        age: String,
         university: String,
         friends: Array(String)
     },

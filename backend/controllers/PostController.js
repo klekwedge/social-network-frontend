@@ -98,7 +98,6 @@ export const getOne = async (req, res) => {
 };
 
 export const create = async (req, res) => {
-    console.log(req.body);
     try {
         const doc = new PostModel({
             text: req.body.text,

@@ -19,8 +19,6 @@ export const Post = ({
   user,
   viewsCount,
 }: PostProps) => {
-  // console.log(user);
-
   return (
     <Flex className="post" p="10px 20px 20px" gap='20px'>
       <UserInfo
