@@ -1,4 +1,4 @@
-$blue: #4361ee;
+$blue: #0077FF;
 
 .post {
   border: 1px solid #dedede;
@@ -8,32 +8,14 @@ $blue: #4361ee;
   position: relative;
   width: 100%;
   max-width: 550px;
-
-  &:hover {
-    border: 1px solid $blue;
-    box-shadow: 0 0 0 1px $blue;
-
-    .post__edit-buttons {
-      opacity: 1;
-    }
-  }
-
-  &-full {
-    margin: 0 auto;
-    margin-top: 30px;
-    max-width: 1200px;
-    &:hover {
-      background-color: #fff;
-      border: 1px solid #dedede;
-      box-shadow: none;
-    }
-  }
+  transition: all 0.3s ease;
 }
 
 .post__image {
   width: 100%;
   height: 300px;
   object-fit: cover;
+  border-radius: 10px;
 
   &-full {
     min-height: 300px;
@@ -59,22 +41,9 @@ $blue: #4361ee;
   padding-left: 40px;
 }
 
-.post__title {
-  font-size: 28px;
+.post__text {
+  font-size: 25px;
   margin: 0;
-
-  a {
-    text-decoration: none;
-
-    &:hover {
-      color: $blue;
-    }
-  }
-
-  &-full {
-    font-size: 42px;
-    font-weight: 900;
-  }
 }
 
 .post__details {

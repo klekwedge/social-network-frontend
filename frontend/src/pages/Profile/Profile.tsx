@@ -190,7 +190,7 @@ export const Profile = () => {
           <Post
             key={obj._id}
             id={obj._id}
-            title={obj.title}
+            text={obj.text}
             imageUrl={
               obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ""
             }

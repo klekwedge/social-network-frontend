@@ -8,55 +8,42 @@ import { IUser } from "../../types";
 
 interface PostProps {
   id: string;
-  title: string;
+  text: string;
   createdAt: string;
   imageUrl: string;
   user: IUser;
   viewsCount: number;
-  children?: React.ReactNode;
-  isFullPost?: boolean;
 }
 
 export const Post = ({
   id,
-  title,
+  text,
   createdAt,
   imageUrl,
   user,
   viewsCount,
-  children,
-  isFullPost,
 }: PostProps) => {
   // console.log(user);
 
   return (
-    <Flex className={`post ${isFullPost ? "post-full" : ""}`}>
+    <Flex className="post" p="10px 20px 20px" gap='20px'>
+      <UserInfo
+        userId={user?._id}
+        avatarUrl={user?.avatarUrl}
+        fullName={user?.fullName}
+        additionalText={createdAt}
+      />
       {imageUrl && (
-        <img
-          className={`post__image ${isFullPost ? "post__image-full" : ""}`}
-          src={imageUrl}
-          alt={title}
-        />
+        <img className="post__image" src={imageUrl} alt="post photo" />
       )}
-      <div className="post__wrapper">
-        <UserInfo
-          userId={user?._id}
-          avatarUrl={user?.avatarUrl}
-          fullName={user?.fullName}
-          additionalText={createdAt}
-        />
-        <div className="post__indention">
-          <h2 className={`post__title ${isFullPost ? "post__title-full" : ""}`}>
-            {isFullPost ? title : <Link to={`/posts/${id}`}>{title}</Link>}
-          </h2>
-          {children && <div className="post__content">{children}</div>}
-          <ul className="post__details">
-            <li>
-              <AiFillEye />
-              <span>{viewsCount}</span>
-            </li>
-          </ul>
-        </div>
+      <div className="post__indention">
+        <h2 className="post__text">{text}</h2>
+        <ul className="post__details">
+          <li>
+            <AiFillEye />
+            <span>{viewsCount}</span>
+          </li>
+        </ul>
       </div>
     </Flex>
   );

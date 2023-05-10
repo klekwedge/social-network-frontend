@@ -13,7 +13,6 @@ export interface IUser {
 
 export interface IPost {
     _id: string;
-    title: string;
     text: string;
     viewsCount: number;
     user: IUser;

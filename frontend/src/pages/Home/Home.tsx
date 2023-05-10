@@ -63,6 +63,8 @@ export const Home = () => {
   //   return <Navigate to="/" />;
   // }
 
+  console.log(posts.items);
+
   return (
     <Flex
       alignItems="center"
@@ -148,7 +150,7 @@ export const Home = () => {
             <Post
               key={post._id}
               id={post._id}
-              title={post.title}
+              text={post.text}
               imageUrl={
                 post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""
               }
