@@ -10,6 +10,7 @@ import { Header } from "./components/Header/Header";
 import { Friends } from "./pages/Friends/Friends";
 import { Sidebar } from "./components/Sidebar/Sidebar";
 import { Container, Flex } from "@chakra-ui/react";
+import { Page404 } from "./pages/Page404/Page404";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ function App() {
           <Route path="/friends" element={<Friends />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
-          <Route path="*" element={<h1>404</h1>} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
       </Flex>
     </Container>
