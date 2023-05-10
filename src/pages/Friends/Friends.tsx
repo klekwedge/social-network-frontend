@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { Flex } from "@chakra-ui/react";
 import "./Friends.scss";
 import axios from "../../axios";
 import { useAppSelector } from "../../hooks/redux-hook";
 import { selectIsAuth } from "../../redux/slices/auth";
-import { PostSkeleton } from "../../components/PostSkeleton/PostSkeleton";
+// import { PostSkeleton } from "../../components/PostSkeleton/PostSkeleton";
 import { Post } from "../../components/Post/Post";
 
 export const Friends = () => {

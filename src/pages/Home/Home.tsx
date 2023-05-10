@@ -50,7 +50,7 @@ export const Home = () => {
 
         setIsTextAreaOpen(false);
         setText("");
-        setImageUrl('')
+        setImageUrl("");
       } catch (error) {
         console.warn(error);
         alert("Ошибка при создании статьи");
@@ -145,20 +145,26 @@ export const Home = () => {
           ""
         )}
       </Flex>
-      {isPostsLoading
-        ? [...Array(3)].map((obj, index) => <PostSkeleton key={index} />)
-        : posts.items.map((post) => (
-            <Post
-              key={post._id}
-              text={post.text}
-              imageUrl={
-                post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""
-              }
-              user={post.user}
-              createdAt={post.createdAt}
-              viewsCount={post.viewsCount}
-            />
-          ))}
+      {isPostsLoading ? (
+        <>
+          <PostSkeleton />
+          <PostSkeleton />
+          <PostSkeleton />
+        </>
+      ) : (
+        posts.items.map((post) => (
+          <Post
+            key={post._id}
+            text={post.text}
+            imageUrl={
+              post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""
+            }
+            user={post.user}
+            createdAt={post.createdAt}
+            viewsCount={post.viewsCount}
+          />
+        ))
+      )}
     </Flex>
   );
 };
