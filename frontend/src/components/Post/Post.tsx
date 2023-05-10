@@ -1,13 +1,10 @@
-import { Link } from "react-router-dom";
-import { AiFillEye } from "react-icons/ai";
-
-import "./Post.scss";
 import { Flex } from "@chakra-ui/react";
 import { UserInfo } from "../UserInfo/UserInfo";
 import { IUser } from "../../types";
+import { AiFillEye } from "react-icons/ai";
+import "./Post.scss";
 
 interface PostProps {
-  id: string;
   text: string;
   createdAt: string;
   imageUrl: string;
@@ -16,7 +13,6 @@ interface PostProps {
 }
 
 export const Post = ({
-  id,
   text,
   createdAt,
   imageUrl,

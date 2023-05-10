@@ -1,13 +1,73 @@
 import { useState, useEffect, useRef } from "react";
+import { AiFillEdit, AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
 import { useParams } from "react-router-dom";
 import axios from "../../axios";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hook";
 import { fetchUser } from "../../redux/slices/users";
-import { Avatar, Button, Flex, Heading } from "@chakra-ui/react";
+import {
+  Avatar,
+  Button,
+  ButtonGroup,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  Flex,
+  Heading,
+  IconButton,
+  Input,
+  Tooltip,
+  useEditableContext,
+  useEditableControls,
+} from "@chakra-ui/react";
 import { fetchUserPosts } from "../../redux/slices/posts";
 import { Post } from "../../components/Post/Post";
 import { PostSkeleton } from "../../components/PostSkeleton/PostSkeleton";
 import { changeAvatar } from "../../redux/slices/auth";
+
+function EditableControls() {
+  const {
+    isEditing,
+    getSubmitButtonProps,
+    getCancelButtonProps,
+    getEditButtonProps,
+  } = useEditableControls();
+
+  return isEditing ? (
+    <>
+      <Button
+        {...getSubmitButtonProps()}
+        background="transparent"
+        size="15px"
+        p="5px"
+        ml="5px"
+      >
+        <AiOutlineCheck size="18px" />
+      </Button>
+      <Button
+        background="transparent"
+        size="15px"
+        p="5px"
+        ml="5px"
+        {...getCancelButtonProps()}
+      >
+        {" "}
+        <AiOutlineClose size="18px" />
+      </Button>
+    </>
+  ) : (
+    // <Flex>
+    <Button
+      {...getEditButtonProps()}
+      background="transparent"
+      size="15px"
+      p="5px"
+      ml="5px"
+    >
+      <AiFillEdit size="18px" />
+    </Button>
+    // </Flex>
+  );
+}
 
 export const Profile = () => {
   const dispatch = useAppDispatch();
@@ -102,11 +162,6 @@ export const Profile = () => {
     }
   };
 
-  // console.log(currentUser);
-
-  // console.log('imageUrl', imageUrl);
-  // console.log('avatarUrl', user?.avatarUrl);
-
   return (
     <Flex flexDirection="column">
       {user ? (
@@ -125,17 +180,79 @@ export const Profile = () => {
             <Heading as="h2" fontWeight="500" fontSize="25px" mb="10px">
               {user.fullName}
             </Heading>
-            <Heading as="h2" fontWeight="400" fontSize="20px" mb="5px">
-              Город: {user.city ? user.city : "не указан"}
-            </Heading>
-            <Heading as="h2" fontWeight="400" fontSize="20px" mb="5px">
-              Возраст: {user.age ? user.age : "не указан"}
-            </Heading>
-            <Heading as="h2" fontWeight="400" fontSize="20px" mb="30px">
-              Университет: {user.university ? user.university : "не указан"}
-            </Heading>
+            {isUserCurrent ? (
+              <Flex flexDirection="column" mb="30px" gap="5px">
+                <Editable
+                  defaultValue={currentUser?.city ? currentUser.city : ""}
+                  display="flex"
+                  alignItems="center"
+                  fontSize="20px"
+                  gap="5px"
+                  isPreviewFocusable={false}
+                  onChange={(e) => {
+                    console.log(e);
+                  }}
+                >
+                  Город:
+                  <EditablePreview />
+                  <EditableInput p="0" />
+                  <EditableControls />
+                </Editable>
+                <Editable
+                  defaultValue={currentUser?.age ? String(currentUser.age) : ""}
+                  display="flex"
+                  gap="5px"
+                  alignItems="center"
+                  fontSize="20px"
+                  isPreviewFocusable={false}
+                  onChange={(e) => {
+                    console.log(e);
+                  }}
+                >
+                  Возраст:
+                  <EditablePreview />
+                  <EditableInput p="0" />
+                  <EditableControls />
+                </Editable>
+                <Editable
+                  defaultValue={
+                    currentUser?.university ? currentUser.university : ""
+                  }
+                  display="flex"
+                  alignItems="center"
+                  fontSize="20px"
+                  gap="5px"
+                  isPreviewFocusable={false}
+                  onChange={(e) => {
+                    console.log(e);
+                  }}
+                >
+                  Университет:
+                  <EditablePreview />
+                  <EditableInput p="0" />
+                  <EditableControls />
+                </Editable>
+              </Flex>
+            ) : (
+              <>
+                <Heading as="h2" fontWeight="400" fontSize="20px" mb="5px">
+                  Город: {user.city ? user.city : "не указан"}
+                </Heading>
+                <Heading as="h2" fontWeight="400" fontSize="20px" mb="5px">
+                  Возраст: {user.age ? user.age : "не указан"}
+                </Heading>
+                <Heading as="h2" fontWeight="400" fontSize="20px" mb="30px">
+                  Университет: {user.university ? user.university : "не указан"}
+                </Heading>
+              </>
+            )}
             {isUserCurrent ? (
               <Flex mb="30px" gap="15px">
+                <Button
+                //  onClick={() => inputFileRef.current?.click()}
+                >
+                  Сохранить данные
+                </Button>
                 <Button onClick={() => inputFileRef.current?.click()}>
                   Изменить фото
                 </Button>
@@ -197,12 +314,10 @@ export const Profile = () => {
         userPosts.items.map((obj) => (
           <Post
             key={obj._id}
-            id={obj._id}
             text={obj.text}
             imageUrl={
               obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ""
             }
-            // user={obj.user}
             user={isUserCurrent && currentUser ? currentUser : obj.user}
             createdAt={obj.createdAt}
             viewsCount={obj.viewsCount}
