@@ -12,7 +12,6 @@ export const Friends = () => {
   const isAuth = useAppSelector(selectIsAuth);
   const currentUser = useAppSelector((state) => state.auth.data);
   const { posts } = useAppSelector((state) => state.posts);
-  const [isLoading, setLoading] = useState(false);
 
   const getPosts = async () => {
     if (currentUser) {
@@ -36,20 +35,22 @@ export const Friends = () => {
       gap="30px"
       flexDirection="column"
     >
-      {isLoading
+      {/* {isLoading
         ? [...Array(3)].map((obj, index) => <PostSkeleton key={index} />)
-        : posts.items.map((post) => (
-            <Post
-              key={post._id}
-              text={post.text}
-              imageUrl={
-                post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""
-              }
-              user={post.user}
-              createdAt={post.createdAt}
-              viewsCount={post.viewsCount}
-            />
-          ))}
+        :  */}
+      {posts.items.map((post) => (
+        <Post
+          key={post._id}
+          text={post.text}
+          imageUrl={
+            post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""
+          }
+          user={post.user}
+          createdAt={post.createdAt}
+          viewsCount={post.viewsCount}
+        />
+      ))}
+      {/* } */}
     </Flex>
   );
 };

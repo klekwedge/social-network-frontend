@@ -45,7 +45,8 @@ export const Home = () => {
           text,
         };
 
-        const { data } = await axios.post("/posts", fields);
+        // const { data } = await axios.post("/posts", fields);
+        await axios.post("/posts", fields);
 
         setIsTextAreaOpen(false);
         setText("");
