@@ -5,12 +5,14 @@ import { IFormLoginValues, IFormRegisterValues, IUser, LoadingStatus } from "../
 
 interface IState {
   data: null | IUser,
-  status: LoadingStatus
+  status: LoadingStatus,
+  theme: string
 }
 
 const initialState: IState = {
   data: null,
   status: "loading",
+  theme: localStorage.getItem("theme") || 'dark'
 };
 
 export const fetchAuth = createAsyncThunk("auth/fetchAuth", async (params: IFormLoginValues) => {
@@ -39,6 +41,9 @@ const authSlice = createSlice({
     logout: (state) => {
       state.data = null;
     },
+    changeTheme: (state, action) => {
+      state.theme = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -85,4 +90,4 @@ export const selectIsAuth = (state: RootState) => Boolean(state.auth.data);
 
 export const authReducer = authSlice.reducer;
 
-export const { logout } = authSlice.actions;
+export const { logout, changeTheme } = authSlice.actions;

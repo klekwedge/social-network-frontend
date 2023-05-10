@@ -15,11 +15,13 @@ import {
   PopoverContent,
   Radio,
   RadioGroup,
+  useColorMode,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import "./Header.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hook";
-import { logout } from "../../redux/slices/auth";
+import { changeTheme, logout } from "../../redux/slices/auth";
 import { useEffect, useState } from "react";
 
 export const Header = () => {
@@ -27,7 +29,16 @@ export const Header = () => {
   const currentUser = useAppSelector((state) => state.auth.data);
   const [imageUrl, setImageUrl] = useState("");
   const { isOpen, onToggle, onClose } = useDisclosure();
-  const [color, setColor] = useState("light");
+  const { theme } = useAppSelector((state) => state.auth);
+  const { toggleColorMode } = useColorMode();
+  // const bgColor = useColorModeValue('gray.500', 'whiteAlpha.500')
+  // const secondaryTextColor = useColorModeValue('gray.600', 'green.400')
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme;
+    toggleColorMode();
+  }, [theme]);
 
   useEffect(() => {
     if (currentUser) {
@@ -43,7 +54,11 @@ export const Header = () => {
   };
 
   return (
-    <Flex className="header" justifyContent="space-between">
+    <Flex
+      className="header"
+      justifyContent="space-between"
+      // bg={bgColor}
+    >
       <Link className="header__logo" to="/">
         <img src={Logo} alt="logo icon" />
       </Link>
@@ -61,17 +76,21 @@ export const Header = () => {
           <img src={ArrowIcon} alt="arrow icon" />
         </MenuButton>
         <MenuList>
-          <MenuItem className="menu__item" onClick={onToggle}>
+          <MenuItem
+            className="menu__item"
+            onClick={onToggle}
+            // color={secondaryTextColor}
+          >
             <img src={ThemeIcon} alt="theme icon" />
-            <span>Тема: {color === "light" ? "Светлая" : "Тёмная"}</span>
+            <span>Тема: {theme === "light" ? "Светлая" : "Тёмная"}</span>
             <Popover isOpen={isOpen} onClose={onClose}>
               <PopoverContent maxW="223px" h="90px">
                 <PopoverBody>
                   <RadioGroup
-                    value={color}
+                    value={theme}
                     onChange={(newColor) => {
                       onClose();
-                      setColor(newColor);
+                      dispatch(changeTheme(newColor));
                     }}
                     display="flex"
                     flexDirection="column"
