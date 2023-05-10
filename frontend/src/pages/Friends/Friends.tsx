@@ -14,27 +14,25 @@ export const Friends = () => {
   const { id } = useParams();
   // const navigate = useNavigate();
   const isAuth = useAppSelector(selectIsAuth);
-  const user = useAppSelector((state) => state.auth.data);
+  const currentUser = useAppSelector((state) => state.auth.data);
   const { posts } = useAppSelector((state) => state.posts);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isAuth) {
-      console.log(user);
+      console.log(currentUser);
     }
   }, []);
 
+  const getPosts = async () => {
+    if (currentUser) {
+      const { data } = await axios.get(`/friend/${currentUser._id}`);
+      console.log(data);
+    }
+  };
+
   useEffect(() => {
-    // axios
-    //   .get(`/posts/${id}`)
-    //   .then((res) => {
-    //     setData(res.data);
-    //     setIsLoading(false);
-    //   })
-    //   .catch((err) => {
-    //     console.warn(err);
-    //     alert("Ошибка при получении статьи");
-    //   });
+    getPosts();
   }, []);
 
   if (!window.localStorage.getItem("token") && !isAuth) {

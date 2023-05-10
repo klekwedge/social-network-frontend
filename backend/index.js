@@ -61,6 +61,7 @@ app.patch("/user/:id", checkAuth, UserController.changeUserPhoto);
 
 app.post("/friend", checkAuth, UserController.addFriend);
 app.patch("/friend", checkAuth, UserController.deleteFriend);
+app.get("/friend/:id", checkAuth, UserController.getPostFriends);
 
 app.post("/upload", checkAuth, upload.single("image"), (req, res) => {
     res.json({

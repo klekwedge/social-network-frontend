@@ -2,7 +2,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 import UserModel from "../models/User.js";
-import { UserController } from "./index.js";
+import PostModel from "../models/Post.js";
+import User from "../models/User.js";
 
 export const register = async (req, res) => {
     try {
@@ -156,6 +157,46 @@ export const changeUserPhoto = async (req, res) => {
     }
 };
 
+export const getPostFriends = async (req, res) => {
+    console.log(req.params);
+    try {
+        const user = await UserModel.find(
+            {
+                _id: req.params.id,
+            },
+        )
+        
+        // const friends = user.friends
+
+        // console.log('f', friends);
+
+        const userPosts = await PostModel.find(
+            {
+                user: req.params.id,
+            },
+        )
+
+        // console.log(userPosts);
+
+        // const posts = await UserModel.find({
+        //     _id: {
+        //         $or: {
+
+        //         }
+        //     }
+        // })
+        // res.json(posts);
+        res.json({})
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            message: "Не удалось получить статьи друзей",
+        });
+    }
+
+};
+
 export const addFriend = async (req, res) => {
     try {
         const userId = req.body.user;
@@ -210,7 +251,7 @@ export const deleteFriend = async (req, res) => {
         console.log(error);
 
         res.status(500).json({
-            message: "Не удалось добавить друга",
+            message: "Не удалось удалить друга",
         });
     }
 };

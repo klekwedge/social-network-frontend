@@ -10,6 +10,8 @@ import { useAppDispatch, useAppSelector } from "./hooks/redux-hook";
 import { fetchAuthMe, selectIsAuth } from "./redux/slices/auth";
 import { Header } from "./components/Header/Header";
 import { Friends } from "./pages/Friends/Friends";
+import { Sidebar } from "./components/Sidebar/Sidebar";
+import { Container } from "@chakra-ui/react";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -20,8 +22,9 @@ function App() {
   }, []);
 
   return (
-    <>
+    <Container maxWidth='1200px' m='0 auto' p='0px 20px'>
       <Header />
+      <Sidebar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -34,7 +37,7 @@ function App() {
         <Route path="/friends" element={<Friends />} />
         <Route path="*" element={<h1>404</h1>} />
       </Routes>
-    </>
+    </Container>
   );
 }
 
