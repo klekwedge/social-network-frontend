@@ -22,11 +22,12 @@ import {
 } from "@chakra-ui/react";
 import "./Header.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hook";
-import { changeTheme, logout } from "../../redux/slices/auth";
+import { changeTheme, logout, selectIsAuth } from "../../redux/slices/auth";
 import { useEffect, useState } from "react";
 
 export const Header = () => {
   const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(selectIsAuth);
   const currentUser = useAppSelector((state) => state.auth.data);
   const [imageUrl, setImageUrl] = useState("");
   const { isOpen, onToggle, onClose } = useDisclosure();
@@ -34,7 +35,6 @@ export const Header = () => {
   const { toggleColorMode } = useColorMode();
   // const bgColor = useColorModeValue('gray.500', 'whiteAlpha.500')
   // const secondaryTextColor = useColorModeValue('gray.600', 'green.400')
-
 
   const changePageTheme = (newColor: string) => {
     dispatch(changeTheme(newColor));
@@ -70,69 +70,73 @@ export const Header = () => {
       <Link className="header__logo" to="/">
         <img src={theme === "light" ? LightLogo : DarkLogo} alt="logo icon" />
       </Link>
-      <Menu closeOnSelect={false}>
-        <MenuButton as="button">
-          {currentUser?.avatarUrl ? (
-            <Avatar
-              src={`http://localhost:4444${imageUrl}`}
-              w="32px"
-              h="32px"
-            />
-          ) : (
-            <Avatar src="#" w="32px" h="32px" />
-          )}
-          <img src={ArrowIcon} alt="arrow icon" />
-        </MenuButton>
-        <MenuList>
-          <MenuItem className="menu__item">
-            <Flex alignItems="center" gap="5px">
-              {currentUser?.avatarUrl ? (
-                <Avatar
-                  src={`http://localhost:4444${imageUrl}`}
-                  w="32px"
-                  h="32px"
-                />
-              ) : (
-                <Avatar src="#" w="32px" h="32px" />
-              )}
-              {currentUser?.fullName}
-            </Flex>
-          </MenuItem>
-          <MenuItem
-            className="menu__item"
-            onClick={onToggle}
-            // color={secondaryTextColor}
-          >
-            <img src={ThemeIcon} alt="theme icon" />
-            <span>Тема: {theme === "light" ? "Светлая" : "Тёмная"}</span>
-            <Popover isOpen={isOpen} onClose={onClose}>
-              <PopoverContent maxW="223px" h="90px">
-                <PopoverBody>
-                  <RadioGroup
-                    value={theme}
-                    onChange={(newColor) => {
-                      onClose();
-                      changePageTheme(newColor);
-                    }}
-                    display="flex"
-                    flexDirection="column"
-                    gap="10px"
-                  >
-                    <Radio value="light">Светлая тема</Radio>
-                    <Radio value="dark">Тёмная тема</Radio>
-                  </RadioGroup>
-                </PopoverBody>
-              </PopoverContent>
-            </Popover>
-          </MenuItem>
-          <MenuItem>
-            <Link to="/" onClick={onClickLogout} className="menu__item">
-              <img src={ExitIcon} alt="exit icon" />
-              <span>Выйти</span>
-            </Link>
-          </MenuItem>
-        </MenuList>
-      </Menu>
+      {isAuth ? (
+        <Menu closeOnSelect={false}>
+          <MenuButton as="button">
+            {currentUser?.avatarUrl ? (
+              <Avatar
+                src={`http://localhost:4444${imageUrl}`}
+                w="32px"
+                h="32px"
+              />
+            ) : (
+              <Avatar src="#" w="32px" h="32px" />
+            )}
+            <img src={ArrowIcon} alt="arrow icon" />
+          </MenuButton>
+          <MenuList>
+            <MenuItem className="menu__item">
+              <Flex alignItems="center" gap="5px">
+                {currentUser?.avatarUrl ? (
+                  <Avatar
+                    src={`http://localhost:4444${imageUrl}`}
+                    w="32px"
+                    h="32px"
+                  />
+                ) : (
+                  <Avatar src="#" w="32px" h="32px" />
+                )}
+                {currentUser?.fullName}
+              </Flex>
+            </MenuItem>
+            <MenuItem
+              className="menu__item"
+              onClick={onToggle}
+              // color={secondaryTextColor}
+            >
+              <img src={ThemeIcon} alt="theme icon" />
+              <span>Тема: {theme === "light" ? "Светлая" : "Тёмная"}</span>
+              <Popover isOpen={isOpen} onClose={onClose}>
+                <PopoverContent maxW="223px" h="90px">
+                  <PopoverBody>
+                    <RadioGroup
+                      value={theme}
+                      onChange={(newColor) => {
+                        onClose();
+                        changePageTheme(newColor);
+                      }}
+                      display="flex"
+                      flexDirection="column"
+                      gap="10px"
+                    >
+                      <Radio value="light">Светлая тема</Radio>
+                      <Radio value="dark">Тёмная тема</Radio>
+                    </RadioGroup>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/" onClick={onClickLogout} className="menu__item">
+                <img src={ExitIcon} alt="exit icon" />
+                <span>Выйти</span>
+              </Link>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      ) : (
+        ""
+      )}
     </Flex>
   );
 };

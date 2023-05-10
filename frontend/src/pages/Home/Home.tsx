@@ -7,10 +7,13 @@ import { fetchPosts } from "../../redux/slices/posts";
 import axios from "../../axios";
 import { PostSkeleton } from "../../components/PostSkeleton/PostSkeleton";
 import "./Home.scss";
+import { Navigate } from "react-router-dom";
+import { selectIsAuth } from "../../redux/slices/auth";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.auth.data);
+  const isAuth = useAppSelector(selectIsAuth);
   const { posts } = useAppSelector((state) => state.posts);
   const isPostsLoading = posts.status === "loading";
   const [imageUrl, setImageUrl] = useState("");
@@ -59,11 +62,9 @@ export const Home = () => {
     dispatch(fetchPosts());
   }, []);
 
-  // if (!window.localStorage.getItem("token") && !isAuth) {
-  //   return <Navigate to="/" />;
-  // }
-
-  console.log(posts.items);
+  if (!window.localStorage.getItem("token") && !isAuth) {
+    return <Navigate to="/register" />;
+  }
 
   return (
     <Flex
@@ -149,7 +150,6 @@ export const Home = () => {
         : posts.items.map((post) => (
             <Post
               key={post._id}
-              id={post._id}
               text={post.text}
               imageUrl={
                 post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""

@@ -17,6 +17,7 @@ export const Friends = () => {
   const currentUser = useAppSelector((state) => state.auth.data);
   const { posts } = useAppSelector((state) => state.posts);
   const [isLoading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const getPosts = async () => {
     if (currentUser) {
@@ -29,7 +30,7 @@ export const Friends = () => {
   }, []);
 
   if (!window.localStorage.getItem("token") && !isAuth) {
-    return <Navigate to="/" />;
+    return <Navigate to="/register" />;
   }
 
   return (
@@ -45,7 +46,6 @@ export const Friends = () => {
         : posts.items.map((post) => (
             <Post
               key={post._id}
-              id={post._id}
               text={post.text}
               imageUrl={
                 post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""

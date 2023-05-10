@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { AiFillEdit, AiOutlineClose, AiOutlineCheck } from "react-icons/ai";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import axios from "../../axios";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hook";
 import { fetchUser } from "../../redux/slices/users";
@@ -22,7 +22,7 @@ import {
 import { fetchUserPosts } from "../../redux/slices/posts";
 import { Post } from "../../components/Post/Post";
 import { PostSkeleton } from "../../components/PostSkeleton/PostSkeleton";
-import { changeAvatar } from "../../redux/slices/auth";
+import { changeAvatar, selectIsAuth } from "../../redux/slices/auth";
 
 function EditableControls() {
   const {
@@ -72,6 +72,7 @@ function EditableControls() {
 export const Profile = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
+  const isAuth = useAppSelector(selectIsAuth);
   const [imageUrl, setImageUrl] = useState("");
   const [isUserCurrent, setIsUserCurrent] = useState(false);
   const user = useAppSelector((state) => state.users.user);
@@ -132,8 +133,6 @@ export const Profile = () => {
       alert("Ошибка при обновлении фотографии");
     }
   };
-  
-  console.log(currentUser);
 
   const handleChangeFile = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -173,6 +172,10 @@ export const Profile = () => {
       });
     }
   };
+
+  if (!window.localStorage.getItem("token") && !isAuth) {
+    return <Navigate to="/register" />;
+  }
 
   return (
     <Flex flexDirection="column">

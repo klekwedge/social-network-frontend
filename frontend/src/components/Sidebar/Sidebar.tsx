@@ -6,16 +6,14 @@ import MessangerIcon from "/src/assets/svg/messanger-icon.svg";
 import ImageIcon from "/src/assets/svg/photo-icon.svg";
 import MusicIcon from "/src/assets/svg/music-icon.svg";
 import VideoIcon from "/src/assets/svg/video-icon.svg";
-
-import { Button, Flex, Heading } from "@chakra-ui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { logout, selectIsAuth } from "../../redux/slices/auth";
+import { Button, Flex } from "@chakra-ui/react";
+import { selectIsAuth } from "../../redux/slices/auth";
 import "./Sidebar.scss";
 import { useAppSelector } from "../../hooks/redux-hook";
 
 export const Sidebar = () => {
-  const dispatch = useDispatch();
-  const isAuth = useSelector(selectIsAuth);
+
+  const isAuth = useAppSelector(selectIsAuth);
   const userId = useAppSelector((state) => state.auth.data?._id);
   const currentUser = useAppSelector((state) => state.auth.data);
 
