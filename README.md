@@ -15,7 +15,7 @@
 
 **Для запуска проекта на вашем компьютере должны быть установлены [npm](https://nodejs.org/en/) и [git](https://git-scm.com/downloads)**
 
-1. Сделайте клон этого репозитория ```git clone https://github.com/klekwedge/vk-test-fullstack.git```
+1. Сделайте клон этого репозитория ```git clone https://github.com/klekwedge/social-network-frontend.git``
 2. Установите все необходимые пакеты npm с помощью ```npm i```
 3. Запустите проект командой ```npm run dev```
 
