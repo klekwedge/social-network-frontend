@@ -27,6 +27,9 @@ const app = express();
 
 const storage = multer.diskStorage({
     destination: (_, __, cb) => {
+        if (!fs.existsSync("uploads")) {
+            fs.mkdirSync("uploads");
+        }
         cb(null, "uploads");
     },
     filename: (_, file, cb) => {
@@ -88,7 +91,7 @@ app.patch(
 
 app.get("/user/posts/:id", PostController.getUserPosts);
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
     if (err) {
         return console.log(err);
     }

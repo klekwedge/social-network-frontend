@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import "./Registration.scss";
 import { useForm } from "react-hook-form";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hook";
 import { selectIsAuth } from "../../redux/slices/auth";
 import { fetchRegister } from "../../redux/slices/auth";
@@ -130,6 +130,13 @@ export const Registration = () => {
           Зарегистрироваться
         </Button>
       </form>
+
+      <Heading as="h3" fontWeight="400" fontSize="18px" mt="50px">
+        Уже зарегистрированы?{" "}
+        <Link to="/login" style={{ color: "#0077ff" }}>
+          Войти
+        </Link>
+      </Heading>
     </Flex>
   );
 };
