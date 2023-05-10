@@ -103,7 +103,7 @@ export const Home = () => {
           <div className="home__image-wrapper">
             <img
               className="home__image"
-              src={`http://localhost:4444${imageUrl}`}
+              src={`https://social-network-backend-nbvt.onrender.com${imageUrl}`}
               alt="Uploaded"
             />
             {imageUrl && (
@@ -157,7 +157,7 @@ export const Home = () => {
             key={post._id}
             text={post.text}
             imageUrl={
-              post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""
+              post.imageUrl ? `https://social-network-backend-nbvt.onrender.com${post.imageUrl}` : ""
             }
             user={post.user}
             createdAt={post.createdAt}

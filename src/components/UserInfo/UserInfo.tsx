@@ -19,7 +19,7 @@ export const UserInfo = ({
     <Flex display="flex" alignItems="center">
       <Link to={`/profile/${userId}`}>
         <Avatar
-          src={avatarUrl ? `http://localhost:4444${avatarUrl}` : ""}
+          src={avatarUrl ? `https://social-network-backend-nbvt.onrender.com${avatarUrl}` : ""}
           w="30px"
           h="30px"
           borderRadius="30px"

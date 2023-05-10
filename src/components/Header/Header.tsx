@@ -73,7 +73,7 @@ export const Header = () => {
           <MenuButton as="button">
             {currentUser?.avatarUrl ? (
               <Avatar
-                src={`http://localhost:4444${imageUrl}`}
+                src={`https://social-network-backend-nbvt.onrender.com${imageUrl}`}
                 w="32px"
                 h="32px"
               />
@@ -87,7 +87,7 @@ export const Header = () => {
               <Flex alignItems="center" gap="5px">
                 {currentUser?.avatarUrl ? (
                   <Avatar
-                    src={`http://localhost:4444${imageUrl}`}
+                    src={`https://social-network-backend-nbvt.onrender.com${imageUrl}`}
                     w="32px"
                     h="32px"
                   />

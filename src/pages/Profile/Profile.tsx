@@ -178,7 +178,7 @@ export const Profile = () => {
         <Flex position="relative" alignItems="center" mb="30px" gap="30px">
           {imageUrl ? (
             <Avatar
-              src={`http://localhost:4444${imageUrl}`}
+              src={`https://social-network-backend-nbvt.onrender.com${imageUrl}`}
               w="200px"
               h="200px"
               mb="10px"
@@ -324,7 +324,7 @@ export const Profile = () => {
             key={obj._id}
             text={obj.text}
             imageUrl={
-              obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ""
+              obj.imageUrl ? `https://social-network-backend-nbvt.onrender.com${obj.imageUrl}` : ""
             }
             user={isUserCurrent && currentUser ? currentUser : obj.user}
             createdAt={obj.createdAt}

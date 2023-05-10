@@ -43,7 +43,7 @@ export const Friends = () => {
           key={post._id}
           text={post.text}
           imageUrl={
-            post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""
+            post.imageUrl ? `https://social-network-backend-nbvt.onrender.com${post.imageUrl}` : ""
           }
           user={post.user}
           createdAt={post.createdAt}
