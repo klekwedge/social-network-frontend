@@ -83,6 +83,20 @@ export const Header = () => {
           <img src={ArrowIcon} alt="arrow icon" />
         </MenuButton>
         <MenuList>
+          <MenuItem className="menu__item">
+            <Flex alignItems="center" gap="5px">
+              {currentUser?.avatarUrl ? (
+                <Avatar
+                  src={`http://localhost:4444${imageUrl}`}
+                  w="32px"
+                  h="32px"
+                />
+              ) : (
+                <Avatar src="#" w="32px" h="32px" />
+              )}
+              {currentUser?.fullName}
+            </Flex>
+          </MenuItem>
           <MenuItem
             className="menu__item"
             onClick={onToggle}
