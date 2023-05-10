@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AiFillEye, AiFillDelete, AiFillEdit } from "react-icons/ai";
+import { AiFillEye } from "react-icons/ai";
 
 import "./Post.scss";
 import { Flex } from "@chakra-ui/react";
@@ -15,7 +15,6 @@ interface PostProps {
   viewsCount: number;
   children?: React.ReactNode;
   isFullPost?: boolean;
-  isEditable?: boolean;
 }
 
 export const Post = ({
@@ -27,20 +26,11 @@ export const Post = ({
   viewsCount,
   children,
   isFullPost,
-  isEditable,
 }: PostProps) => {
   // console.log(user);
 
   return (
     <Flex className={`post ${isFullPost ? "post-full" : ""}`}>
-      {isEditable && (
-        <div className="post__edit-buttons">
-          <Link to={`/posts/${id}/edit`}>
-            <AiFillEdit />
-          </Link>
-          <AiFillDelete />
-        </div>
-      )}
       {imageUrl && (
         <img
           className={`post__image ${isFullPost ? "post__image-full" : ""}`}

@@ -98,9 +98,9 @@ export const getOne = async (req, res) => {
 };
 
 export const create = async (req, res) => {
+    console.log(req.body);
     try {
         const doc = new PostModel({
-            title: req.body.title,
             text: req.body.text,
             imageUrl: req.body.imageUrl,
             tags: req.body.tags,
@@ -128,7 +128,6 @@ export const update = async (req, res) => {
                 _id: postId,
             },
             {
-                title: req.body.title,
                 text: req.body.text,
                 imageUrl: req.body.imageUrl,
                 user: req.userId,

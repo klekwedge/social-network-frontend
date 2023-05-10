@@ -4,11 +4,10 @@ $blue: #4361ee;
   border: 1px solid #dedede;
   flex-direction: column;
   border-radius: 6px;
-  overflow: hidden;
   margin-bottom: 15px;
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 550px;
 
   &:hover {
     border: 1px solid $blue;
@@ -84,10 +83,10 @@ $blue: #4361ee;
   margin: 20px 0 0 0;
 
   li {
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: flex-end;
     font-size: 14px;
-    margin-right: 20px;
     opacity: 0.5;
 
     svg {
@@ -95,29 +94,4 @@ $blue: #4361ee;
       margin-right: 5px;
     }
   }
-}
-
-.post__edit-buttons {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  right: 10px;
-  top: 10px;
-  border-radius: 10px;
-  opacity: 0;
-  transition: all 0.15s ease-in-out;
-}
-
-.post__edit-buttons > * {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 1);
-  border-radius: 50%;
-  padding: 2px;
-  width: 20px;
-  height: 20px;
-  box-sizing: border-box;
-  cursor: pointer;
 }

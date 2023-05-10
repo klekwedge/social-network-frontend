@@ -1,0 +1,22 @@
+textarea.home__input-active {
+  font-size: 20px;
+  min-height: 150px;
+  margin-bottom: 5px;
+}
+
+.home__image {
+  border-radius: 10px;
+}
+
+.home__image-wrapper {
+  position: relative;
+}
+
+.home__image-wrapper {
+  align-self: flex-start;
+  & > button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}

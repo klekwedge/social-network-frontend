@@ -20,7 +20,7 @@ export const PostSkeleton = ({ isFull }: PostSkeletonProps) => {
           </div>
           <div className="skeleton__info">
             <Skeleton width="100%" height={45} mb="10px" />
-            <Skeleton width="400px" height={90} />
+            <Skeleton width="550px" height={90} />
           </div>
         </div>
       </Stack>
