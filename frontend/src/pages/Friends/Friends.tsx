@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { Button, Flex, Input } from "@chakra-ui/react";
-import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
 import "./Friends.scss";
 import axios from "../../axios";
 import { useAppSelector } from "../../hooks/redux-hook";
