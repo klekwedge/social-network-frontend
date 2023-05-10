@@ -4,7 +4,6 @@ import { Home } from "./pages/Home/Home";
 import { Login } from "./pages/Login/Login";
 import { Registration } from "./pages/Registration/Registration";
 import { Profile } from "./pages/Profile/Profile";
-import { AddPost } from "./pages/AddPost/AddPost";
 import { useAppDispatch, useAppSelector } from "./hooks/redux-hook";
 import { fetchAuthMe, selectIsAuth } from "./redux/slices/auth";
 import { Header } from "./components/Header/Header";
@@ -23,15 +22,13 @@ function App() {
   return (
     <Container maxWidth="1200px" m="0 auto" p="0px 20px">
       <Header />
-      <Flex gap='40px'>
+      <Flex gap='60px'>
         <Sidebar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
-          <Route path="/posts/edit" element={<AddPost />} />
           <Route path="/profile/:id" element={<Profile />} />
-          <Route path="/add-post" element={<AddPost />} />
           <Route path="/friends" element={<Friends />} />
           <Route path="*" element={<h1>404</h1>} />
         </Routes>

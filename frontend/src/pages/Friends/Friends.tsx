@@ -53,7 +53,7 @@ export const Friends = () => {
             <Post
               key={post._id}
               id={post._id}
-              title={post.title}
+              text={post.text}
               imageUrl={
                 post.imageUrl ? `http://localhost:4444${post.imageUrl}` : ""
               }

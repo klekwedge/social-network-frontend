@@ -56,9 +56,6 @@ export const Sidebar = () => {
           ) : (
             ""
           )}
-          <Link to="/add-post" className="sidebar__link">
-            <Button>Написать пост</Button>
-          </Link>
         </>
       ) : (
         <>
