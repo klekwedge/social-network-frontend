@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, useMemo, useCallback } from "react";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import { Button, Flex, Input } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { Flex } from "@chakra-ui/react";
 import "./Friends.scss";
 import axios from "../../axios";
 import { useAppSelector } from "../../hooks/redux-hook";
@@ -9,17 +9,14 @@ import { PostSkeleton } from "../../components/PostSkeleton/PostSkeleton";
 import { Post } from "../../components/Post/Post";
 
 export const Friends = () => {
-  const { id } = useParams();
-  // const navigate = useNavigate();
   const isAuth = useAppSelector(selectIsAuth);
   const currentUser = useAppSelector((state) => state.auth.data);
   const { posts } = useAppSelector((state) => state.posts);
   const [isLoading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const getPosts = async () => {
     if (currentUser) {
-      const { data } = await axios.get(`/friend/${currentUser._id}`);
+      await axios.get(`/friend/${currentUser._id}`);
     }
   };
 

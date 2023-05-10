@@ -12,7 +12,6 @@ import { selectIsAuth } from "../../redux/slices/auth";
 
 export const Home = () => {
   const dispatch = useAppDispatch();
-  const userData = useAppSelector((state) => state.auth.data);
   const isAuth = useAppSelector(selectIsAuth);
   const { posts } = useAppSelector((state) => state.posts);
   const isPostsLoading = posts.status === "loading";

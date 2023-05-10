@@ -7,16 +7,11 @@ import { fetchUser } from "../../redux/slices/users";
 import {
   Avatar,
   Button,
-  ButtonGroup,
   Editable,
   EditableInput,
   EditablePreview,
   Flex,
   Heading,
-  IconButton,
-  Input,
-  Tooltip,
-  useEditableContext,
   useEditableControls,
 } from "@chakra-ui/react";
 import { fetchUserPosts } from "../../redux/slices/posts";

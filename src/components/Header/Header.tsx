@@ -4,6 +4,7 @@ import LightLogo from "/src/assets/svg/light-logo-icon.svg";
 import ExitIcon from "/src/assets/svg/exit-icon.svg";
 import ThemeIcon from "/src/assets/svg/theme-icon.svg";
 import ArrowIcon from "/src/assets/svg/arrow-bottom-icon.svg";
+
 import {
   Avatar,
   Flex,
@@ -17,9 +18,9 @@ import {
   Radio,
   RadioGroup,
   useColorMode,
-  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
+
 import "./Header.scss";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hook";
 import { changeTheme, logout, selectIsAuth } from "../../redux/slices/auth";
@@ -33,8 +34,6 @@ export const Header = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
   const { theme } = useAppSelector((state) => state.auth);
   const { toggleColorMode } = useColorMode();
-  // const bgColor = useColorModeValue('gray.500', 'whiteAlpha.500')
-  // const secondaryTextColor = useColorModeValue('gray.600', 'green.400')
 
   const changePageTheme = (newColor: string) => {
     dispatch(changeTheme(newColor));
@@ -65,7 +64,6 @@ export const Header = () => {
     <Flex
       className="header"
       justifyContent="space-between"
-      // bg={bgColor}
     >
       <Link className="header__logo" to="/">
         <img src={theme === "light" ? LightLogo : DarkLogo} alt="logo icon" />
@@ -102,7 +100,6 @@ export const Header = () => {
             <MenuItem
               className="menu__item"
               onClick={onToggle}
-              // color={secondaryTextColor}
             >
               <img src={ThemeIcon} alt="theme icon" />
               <span>Тема: {theme === "light" ? "Светлая" : "Тёмная"}</span>

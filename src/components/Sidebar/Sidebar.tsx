@@ -8,14 +8,13 @@ import MusicIcon from "/src/assets/svg/music-icon.svg";
 import VideoIcon from "/src/assets/svg/video-icon.svg";
 import { Button, Flex } from "@chakra-ui/react";
 import { selectIsAuth } from "../../redux/slices/auth";
-import "./Sidebar.scss";
 import { useAppSelector } from "../../hooks/redux-hook";
+import "./Sidebar.scss";
 
 export const Sidebar = () => {
 
   const isAuth = useAppSelector(selectIsAuth);
   const userId = useAppSelector((state) => state.auth.data?._id);
-  const currentUser = useAppSelector((state) => state.auth.data);
 
   return (
     <Flex flexDirection="column" className="sidebar">

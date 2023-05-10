@@ -1,5 +1,3 @@
-import React from "react";
-import styles from "./UserInfo.scss";
 import { Avatar, Flex, Heading } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
