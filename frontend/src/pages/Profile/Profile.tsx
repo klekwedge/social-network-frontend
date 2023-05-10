@@ -7,6 +7,7 @@ import { Avatar, Button, Flex, Heading } from "@chakra-ui/react";
 import { fetchUserPosts } from "../../redux/slices/posts";
 import { Post } from "../../components/Post/Post";
 import { PostSkeleton } from "../../components/PostSkeleton/PostSkeleton";
+import { changeAvatar } from "../../redux/slices/auth";
 
 export const Profile = () => {
   const dispatch = useAppDispatch();
@@ -54,6 +55,8 @@ export const Profile = () => {
       await axios.patch(`/user/${id}`, {
         imageUrl,
       });
+
+      dispatch(changeAvatar(imageUrl));
     } catch (error) {
       console.warn(error);
       alert("Ошибка при обновлении фотографии");
@@ -78,7 +81,7 @@ export const Profile = () => {
   };
 
   const onClickRemoveImage = () => {
-    setImageUrl("");
+    setImageUrl(currentUser?.avatarUrl || "");
   };
 
   const addFriend = async () => {
@@ -98,6 +101,11 @@ export const Profile = () => {
       });
     }
   };
+
+  // console.log(currentUser);
+
+  // console.log('imageUrl', imageUrl);
+  // console.log('avatarUrl', user?.avatarUrl);
 
   return (
     <Flex flexDirection="column">
@@ -137,7 +145,7 @@ export const Profile = () => {
                   onChange={handleChangeFile}
                   hidden
                 />
-                {imageUrl !== user.avatarUrl && (
+                {imageUrl !== currentUser?.avatarUrl && (
                   <Flex gap="15px">
                     <Button onClick={onClickRemoveImage}>Удалить</Button>
                     <Button onClick={onSubmit}>Сохранить</Button>
@@ -186,7 +194,7 @@ export const Profile = () => {
           <PostSkeleton />
         </Flex>
       ) : (
-        userPosts.items.map((obj, index) => (
+        userPosts.items.map((obj) => (
           <Post
             key={obj._id}
             id={obj._id}
@@ -194,7 +202,8 @@ export const Profile = () => {
             imageUrl={
               obj.imageUrl ? `http://localhost:4444${obj.imageUrl}` : ""
             }
-            user={obj.user}
+            // user={obj.user}
+            user={isUserCurrent && currentUser ? currentUser : obj.user}
             createdAt={obj.createdAt}
             viewsCount={obj.viewsCount}
           />

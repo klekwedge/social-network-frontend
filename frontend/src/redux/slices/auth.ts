@@ -43,6 +43,12 @@ const authSlice = createSlice({
     },
     changeTheme: (state, action) => {
       state.theme = action.payload
+    },
+    changeAvatar: (state, action) => {
+      console.log(action);
+      if (state.data) {
+        state.data.avatarUrl = action.payload
+      }
     }
   },
   extraReducers: (builder) => {
@@ -90,4 +96,4 @@ export const selectIsAuth = (state: RootState) => Boolean(state.auth.data);
 
 export const authReducer = authSlice.reducer;
 
-export const { logout, changeTheme } = authSlice.actions;
+export const { logout, changeTheme, changeAvatar } = authSlice.actions;
