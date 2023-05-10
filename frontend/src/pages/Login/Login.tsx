@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import {
   Button,
@@ -7,12 +8,14 @@ import {
   FormControl,
   FormLabel,
   FormHelperText,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
-
-import "./Login.scss";
 import { fetchAuth, selectIsAuth } from "../../redux/slices/auth";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux-hook";
+import { BiHide, BiShow } from "react-icons/bi";
+import "./Login.scss";
 
 type FormValues = {
   email: string;
@@ -22,6 +25,9 @@ type FormValues = {
 export const Login = () => {
   const isAuth = useAppSelector(selectIsAuth);
   const dispatch = useAppDispatch();
+  const [show, setShow] = useState(false);
+
+  const handleClick = () => setShow(!show);
 
   const {
     register,
@@ -75,12 +81,28 @@ export const Login = () => {
         </FormControl>
         <FormControl mb="25px">
           <FormLabel mb="5px">Пароль</FormLabel>
-          <Input
-            errorBorderColor="crimson"
-            placeholder="Введите пароль"
-            isInvalid={Boolean(errors.password?.message)}
-            {...register("password", { required: "Укажите пароль" })}
-          />
+
+          <InputGroup size="md">
+            <Input
+              pr="4.5rem"
+              type={show ? "text" : "password"}
+              errorBorderColor="crimson"
+              placeholder="Введите пароль"
+              isInvalid={Boolean(errors.password?.message)}
+              {...register("password", { required: "Укажите пароль" })}
+            />
+            <InputRightElement width="4.5rem">
+              <Button
+                h="1.75rem"
+                size="sm"
+                onClick={handleClick}
+                background="transparent"
+              >
+                {show ? <BiShow size="18px" /> : <BiHide size="18px" />}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+
           <FormHelperText>{errors.password?.message}</FormHelperText>
         </FormControl>
         <Button disabled={!isValid} type="submit" colorScheme="blue">

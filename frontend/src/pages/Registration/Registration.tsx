@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { BiShow, BiHide } from "react-icons/bi";
 import {
   Avatar,
   Button,
@@ -7,6 +9,8 @@ import {
   FormLabel,
   Heading,
   Input,
+  InputGroup,
+  InputRightElement,
 } from "@chakra-ui/react";
 import "./Registration.scss";
 import { useForm } from "react-hook-form";
@@ -24,6 +28,9 @@ type FormValues = {
 export const Registration = () => {
   const isAuth = useAppSelector(selectIsAuth);
   const dispatch = useAppDispatch();
+  const [show, setShow] = useState(false);
+
+  const handleClick = () => setShow(!show);
 
   const {
     register,
@@ -62,10 +69,10 @@ export const Registration = () => {
       alignItems="center"
       flexDirection="column"
     >
-      <Heading as="h2" fontWeight="500" mb="15px">
+      <Heading as="h2" fontWeight="500" mb="30px">
         Создание аккаунта
       </Heading>
-      <Avatar w="90px" h="90px" mb="30px" />
+      <Avatar w="90px" h="90px" mb="40px" />
       <form onSubmit={handleSubmit(onSubmit)} className="register__form">
         <FormControl mb="15px">
           <FormLabel mb="5px">Полное имя</FormLabel>
@@ -75,7 +82,9 @@ export const Registration = () => {
             errorBorderColor="crimson"
             {...register("fullName", { required: "Укажите полное имя" })}
           />
-          <FormHelperText>{errors.fullName?.message}</FormHelperText>
+          <FormHelperText color="crimson">
+            {errors.fullName?.message}
+          </FormHelperText>
         </FormControl>
         <FormControl mb="15px">
           <FormLabel mb="5px">Почта</FormLabel>
@@ -86,18 +95,36 @@ export const Registration = () => {
             {...register("email", { required: "Укажите почту" })}
             type="email"
           />
-          <FormHelperText>{errors.email?.message}</FormHelperText>
+          <FormHelperText color="crimson">
+            {errors.email?.message}
+          </FormHelperText>
         </FormControl>
 
-        <FormControl mb="15px">
+        <FormControl mb="30px">
           <FormLabel mb="5px">Пароль</FormLabel>
-          <Input
-            placeholder="Введите пароль"
-            isInvalid={Boolean(errors.password?.message)}
-            errorBorderColor="crimson"
-            {...register("password", { required: "Укажите пароль" })}
-          />
-          <FormHelperText>{errors.password?.message}</FormHelperText>
+          <InputGroup size="md">
+            <Input
+              pr="4.5rem"
+              type={show ? "text" : "password"}
+              placeholder="Введите пароль"
+              isInvalid={Boolean(errors.password?.message)}
+              errorBorderColor="crimson"
+              {...register("password", { required: "Укажите пароль" })}
+            />
+            <InputRightElement width="4.5rem">
+              <Button
+                h="1.75rem"
+                size="sm"
+                onClick={handleClick}
+                background="transparent"
+              >
+                {show ? <BiShow size="18px" /> : <BiHide size="18px" />}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
+          <FormHelperText color="crimson">
+            {errors.password?.message}
+          </FormHelperText>
         </FormControl>
         <Button disabled={!isValid} type="submit">
           Зарегистрироваться
