@@ -100,16 +100,9 @@ export const Profile = () => {
   };
 
   return (
-    <Flex flexDirection="column" p="0px 30px">
+    <Flex flexDirection="column">
       {user ? (
-        <Flex
-          width="100%"
-          height="100%"
-          flexDirection="column"
-          alignItems="center"
-          position="relative"
-          mb="30px"
-        >
+        <Flex position="relative" alignItems="center" mb="30px" gap="30px">
           {imageUrl ? (
             <Avatar
               src={`http://localhost:4444${imageUrl}`}
@@ -120,66 +113,70 @@ export const Profile = () => {
           ) : (
             <Avatar src="#" w="200px" h="200px" mb="10px" />
           )}
-
-          <Heading as="h2" fontWeight="500" fontSize="25px" mb="10px">
-            {user.fullName}
-          </Heading>
-          <Heading as="h2" fontWeight="400" fontSize="20px" mb="5px">
-            Город: {user.city ? user.city : "не указан"}
-          </Heading>
-          <Heading as="h2" fontWeight="400" fontSize="20px" mb="5px">
-            Возраст: {user.age ? user.age : "не указан"}
-          </Heading>
-          <Heading as="h2" fontWeight="400" fontSize="20px" mb="5px">
-            Университет: {user.university ? user.university : "не указан"}
-          </Heading>
-          {isUserCurrent ? (
-            <Flex mb="30px" gap="15px">
-              <Button onClick={() => inputFileRef.current?.click()}>
-                Изменить фото
-              </Button>
-              <input
-                ref={inputFileRef}
-                type="file"
-                onChange={handleChangeFile}
-                hidden
-              />
-              {imageUrl !== user.avatarUrl && (
-                <Flex gap="15px">
-                  <Button onClick={onClickRemoveImage}>Удалить</Button>
-                  <Button onClick={onSubmit}>Сохранить</Button>
-                </Flex>
-              )}
-            </Flex>
-          ) : (
-            <Flex position="absolute" right="20px" gap="10px">
-              {isFriend}
-              {isFriend ? (
-                <Button
-                  onClick={() => {
-                    setIsFriend(false);
-                    removeFriend();
-                  }}
-                >
-                  Удалить из друзей
+          <Flex flexDirection="column">
+            <Heading as="h2" fontWeight="500" fontSize="25px" mb="10px">
+              {user.fullName}
+            </Heading>
+            <Heading as="h2" fontWeight="400" fontSize="20px" mb="5px">
+              Город: {user.city ? user.city : "не указан"}
+            </Heading>
+            <Heading as="h2" fontWeight="400" fontSize="20px" mb="5px">
+              Возраст: {user.age ? user.age : "не указан"}
+            </Heading>
+            <Heading as="h2" fontWeight="400" fontSize="20px" mb="30px">
+              Университет: {user.university ? user.university : "не указан"}
+            </Heading>
+            {isUserCurrent ? (
+              <Flex mb="30px" gap="15px">
+                <Button onClick={() => inputFileRef.current?.click()}>
+                  Изменить фото
                 </Button>
-              ) : (
-                <Button
-                  onClick={() => {
-                    setIsFriend(true);
-                    addFriend();
-                  }}
-                >
-                  Добавить в друзья
-                </Button>
-              )}
-            </Flex>
-          )}
+                <input
+                  ref={inputFileRef}
+                  type="file"
+                  onChange={handleChangeFile}
+                  hidden
+                />
+                {imageUrl !== user.avatarUrl && (
+                  <Flex gap="15px">
+                    <Button onClick={onClickRemoveImage}>Удалить</Button>
+                    <Button onClick={onSubmit}>Сохранить</Button>
+                  </Flex>
+                )}
+              </Flex>
+            ) : (
+              <Flex gap="10px">
+                {isFriend}
+                {isFriend ? (
+                  <Button
+                    onClick={() => {
+                      setIsFriend(false);
+                      removeFriend();
+                    }}
+                    p="5px 10px"
+                    backgroundColor="blackAlpha.200"
+                  >
+                    Удалить из друзей
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      setIsFriend(true);
+                      addFriend();
+                    }}
+                    p="5px 10px"
+                    backgroundColor="blackAlpha.200"
+                  >
+                    Добавить в друзья
+                  </Button>
+                )}
+              </Flex>
+            )}
+          </Flex>
         </Flex>
       ) : (
         ""
       )}
-
       <Heading as="h3" fontWeight="400" fontSize="25px" mb="20px">
         Посты пользователя:
       </Heading>
