@@ -1,9 +1,28 @@
 .header {
   padding: 10px 5px;
   margin-bottom: 15px;
+
+  & button > span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
 }
 
 .header__logo {
   display: flex;
   gap: 5px;
+  min-width: 170px;
+}
+
+.menu__item {
+  background: transparent;
+  display: flex;
+  border-radius: 5px;
+  width: 100%;
+  gap: 8px;
+
+  // &:hover {
+  //   background-color: rgba(3, 46, 204, 0.08);;
+  // }
 }

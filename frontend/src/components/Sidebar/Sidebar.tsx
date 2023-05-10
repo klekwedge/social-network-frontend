@@ -19,13 +19,6 @@ export const Sidebar = () => {
   const userId = useAppSelector((state) => state.auth.data?._id);
   const currentUser = useAppSelector((state) => state.auth.data);
 
-  const onClickLogout = () => {
-    if (window.confirm("Вы действительно хотите выйти?")) {
-      dispatch(logout());
-      window.localStorage.removeItem("token");
-    }
-  };
-
   return (
     <Flex flexDirection="column" className="sidebar">
       {userId ? (
@@ -66,7 +59,6 @@ export const Sidebar = () => {
           <Link to="/add-post" className="sidebar__link">
             <Button>Написать пост</Button>
           </Link>
-          <Button onClick={onClickLogout}>Выйти</Button>
         </>
       ) : (
         <>
