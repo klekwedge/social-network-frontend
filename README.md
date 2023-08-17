@@ -1,4 +1,6 @@
-# vk-test-frontend
+# social-network (vk-test)
+
+**You can also read this README in [English](https://github.com/klekwedge/social-network-frontend/blob/main/README.EN.md).**
 
 ## Оглавление
 
@@ -49,7 +51,7 @@
 ### Ссылки
 
 - [Ссылка на Frontend проект](https://github.com/klekwedge/social-network-frontend)
-- [Frontend деплой](https://social-network-frontend.vercel.app/)
+- [Frontend деплой](https://klekwedge-social-network-frontend.vercel.app/)
 
 - [Ссылка на Backend проект](https://github.com/klekwedge/social-network-backend)
 - [Backend деплой](https://social-network-backend-nbvt.onrender.com/posts)
