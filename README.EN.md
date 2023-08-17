@@ -52,8 +52,11 @@ In response, you need to add links to github repositories with the solution. As 
 
 ### Links
 
-- [Solution URL](https://github.com/klekwedge/social-network-frontend)
-- [Live Site URL](https://klekwedge-social-network-frontend.vercel.app/)
+- [Link to Frontend Project](https://github.com/klekwedge/social-network-frontend)
+- [Frontend deploy](https://klekwedge-social-network-frontend.vercel.app/)
+
+- [Link to Backend Project](https://github.com/klekwedge/social-network-backend)
+- [Backend deploy](https://social-network-backend-nbvt.onrender.com/posts)
 
 ## My process
 
@@ -61,11 +64,15 @@ In response, you need to add links to github repositories with the solution. As 
 
 - React
 - TypeScript
-- Redux Toolkit
+- Node.js
+- Express.js
+- Mongo DB
 - SCSS
 - Chakra UI
 
 ### What I learned
+
+I got acquainted with the MERN stack: I learned how to write a backend using express, work with mongodb. Improved understanding of interaction between Frontend and Backend. I learned how to create controllers for the backend, handle errors, validate received requests, figured out how JWT tokens work.
 
 ## Author
 
